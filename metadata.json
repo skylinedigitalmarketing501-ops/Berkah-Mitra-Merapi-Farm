@@ -1,0 +1,6 @@
+{
+  "name": "CV. Berkah Mitra Merapi Farm (BMMF)",
+  "description": "Website resmi CV. Berkah Mitra Merapi Farm (BMMF) — perusahaan manufaktur, layanan maklon susu bubuk, dan pemesanan produk susu kambing Etawa bubuk B2B.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

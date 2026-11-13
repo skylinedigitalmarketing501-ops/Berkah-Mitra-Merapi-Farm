@@ -1,0 +1,9 @@
+name = "berkah-mitra-merapi-farm"
+compatibility_date = "2026-11-01"
+pages_build_output_dir = "dist"
+
+# Opsional: Aktifkan jika Anda membuat KV Namespace di Dashboard Cloudflare
+# untuk menyimpan data permintaan penawaran B2B dari formulir /kontak.
+# [[kv_namespaces]]
+# binding = "INQUIRIES_KV"
+# id = "GANTI_DENGAN_KV_NAMESPACE_ID"
