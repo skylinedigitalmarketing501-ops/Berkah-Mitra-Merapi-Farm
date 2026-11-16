@@ -15,10 +15,15 @@ export function ArticlesPage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const featuredArticle = editorialArticles.find((a) => a.featured) || editorialArticles[0];
+  const isFiltering =
+    selectedCategory !== 'Semua Kategori' || searchQuery.trim().length > 0;
 
   const filteredArticles = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     return editorialArticles.filter((article) => {
+      if (!isFiltering && featuredArticle && article.id === featuredArticle.id) {
+        return false;
+      }
       const matchesCat =
         selectedCategory === 'Semua Kategori' || article.category === selectedCategory;
       const matchesQuery =
@@ -28,7 +33,7 @@ export function ArticlesPage() {
         article.category.toLowerCase().includes(q);
       return matchesCat && matchesQuery;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, isFiltering, featuredArticle]);
 
   const totalPages = Math.max(1, Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE));
   const safePage = Math.min(currentPage, totalPages);
@@ -47,8 +52,8 @@ export function ArticlesPage() {
       />
 
       {/* Header */}
-      <section className="bg-[#F5F3ED] border-b border-[#E3E8E3] py-12 sm:py-16">
-        <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 space-y-4">
+      <section className="bg-[#F5F3ED] border-b border-[#E3E8E3] py-7 sm:py-9">
+        <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 space-y-3">
           <Breadcrumb items={[{ label: 'Artikel' }]} />
           <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#183D32]">
             PUBLIKASI & INFORMASI
@@ -64,10 +69,10 @@ export function ArticlesPage() {
       </section>
 
       {/* Featured Article */}
-      {featuredArticle && (
-        <section className="bg-white py-12 sm:py-16 border-b border-[#E3E8E3]">
+      {featuredArticle && !isFiltering && (
+        <section className="bg-white py-7 sm:py-10 border-b border-[#E3E8E3]">
           <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-            <Reveal className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center border border-[#E3E8E3] rounded-2xl p-6 sm:p-8 lg:p-10 bg-white">
+            <Reveal className="bmmf-sheen-soft grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center border border-[#E3E8E3] rounded-2xl p-5 sm:p-6 lg:p-7 bg-white">
               <div className="lg:col-span-6">
                 <SafeImage
                   src={featuredArticle.coverImage}
@@ -114,9 +119,9 @@ export function ArticlesPage() {
       )}
 
       {/* Filter, Search, Grid & Pagination */}
-      <section className="bg-white py-14 sm:py-20">
-        <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-[#E3E8E3]">
+      <section className="bg-white py-8 sm:py-11">
+        <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-[#E3E8E3]">
             <div className="flex flex-wrap items-center gap-2">
               {articleCategories.map((cat) => {
                 const isActive = selectedCategory === cat;
@@ -163,11 +168,11 @@ export function ArticlesPage() {
           </div>
 
           {paginatedArticles.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
               {paginatedArticles.map((article) => (
                 <article
                   key={article.id}
-                  className="border border-[#E3E8E3] rounded-2xl overflow-hidden bg-white hover:border-[#183D32]/40 transition-colors flex flex-col"
+                  className="border border-[#E3E8E3] rounded-2xl overflow-hidden bg-white hover:border-[#183D32]/40 hover:-translate-y-1 hover:shadow-sm transition-all duration-300 flex flex-col"
                 >
                   <div className="p-6 pb-0">
                     <SafeImage

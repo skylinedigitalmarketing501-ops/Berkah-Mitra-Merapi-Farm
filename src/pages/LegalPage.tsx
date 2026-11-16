@@ -21,11 +21,11 @@ export function LegalPage({ mode }: LegalPageProps) {
         breadcrumbs={[{ name: title, path }]}
       />
 
-      <section className="bg-white py-12 sm:py-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 space-y-8">
+      <section className="bg-white py-8 sm:py-10">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 space-y-5">
           <Breadcrumb items={[{ label: title }]} />
 
-          <header className="space-y-3 pb-6 border-b border-[#E3E8E3]">
+          <header className="space-y-2 pb-4 border-b border-[#E3E8E3]">
             <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
               DOKUMEN HUKUM & TATA KELOLA
             </p>

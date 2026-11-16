@@ -10,7 +10,7 @@ export function LegacyRemovedPage() {
         description="Halaman rekrutmen tidak lagi digunakan. Website resmi CV. Berkah Mitra Merapi Farm berfokus pada profil perusahaan, layanan maklon, dan produk susu bubuk B2B."
         path="/karier"
       />
-      <section className="bg-white py-24 sm:py-32">
+      <section className="bg-white py-14 sm:py-20">
         <div className="mx-auto max-w-xl px-4 text-center space-y-5">
           <p className="font-mono text-xs font-medium text-[#737D77]">410 · HALAMAN DIHAPUS</p>
           <h1 className="font-display font-bold text-3xl sm:text-4xl text-[#183D32]">

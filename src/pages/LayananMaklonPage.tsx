@@ -25,11 +25,11 @@ export function LayananMaklonPage() {
       />
 
       {/* Header */}
-      <section className="bg-[#F5F3ED] border-b border-[#E3E8E3] py-12 sm:py-16 lg:py-20">
+      <section className="bg-[#F5F3ED] border-b border-[#E3E8E3] py-7 sm:py-10 lg:py-12">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <Breadcrumb items={[{ label: 'Layanan Maklon' }]} />
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            <div className="lg:col-span-7 space-y-5">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-10 items-center">
+            <div className="lg:col-span-7 space-y-4">
               <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#183D32]">
                 JASA MAKLON SUSU BUBUK B2B
               </p>
@@ -43,10 +43,10 @@ export function LayananMaklonPage() {
               <div className="flex flex-wrap items-center gap-3.5 pt-2">
                 <Link
                   to="/kontak?kebutuhan=Maklon"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[11px] transition-colors whitespace-nowrap"
+                  className="bmmf-sheen group inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[11px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap"
                 >
                   <span>Konsultasi dengan Tim BMMF</span>
-                  <ArrowRight className="w-4 h-4 text-[#D3B785]" aria-hidden="true" />
+                  <ArrowRight className="w-4 h-4 text-[#D3B785] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
                 </Link>
                 <a
                   href={getWhatsAppMaklonUrl()}
@@ -62,10 +62,10 @@ export function LayananMaklonPage() {
 
             <div className="lg:col-span-5">
               <SafeImage
-                src={companyConfig.media.productionShowcase.src}
-                alt={companyConfig.media.productionShowcase.alt}
-                caption={companyConfig.media.productionShowcase.caption}
-                isPlaceholder={companyConfig.media.productionShowcase.isPlaceholder}
+                src={companyConfig.media.maklonHeader.src}
+                alt={companyConfig.media.maklonHeader.alt}
+                caption={companyConfig.media.maklonHeader.caption}
+                isPlaceholder={companyConfig.media.maklonHeader.isPlaceholder}
                 aspectClassName="aspect-[4/3]"
                 priority
               />
@@ -75,9 +75,9 @@ export function LayananMaklonPage() {
       </section>
 
       {/* A. Mengenal Layanan Maklon */}
-      <section className="bg-white py-16 sm:py-20 border-b border-[#E3E8E3]">
+      <section className="bg-white py-9 sm:py-12 border-b border-[#E3E8E3]">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
             <Reveal className="lg:col-span-5 space-y-3">
               <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
                 MENGENAL LAYANAN MAKLON
@@ -108,9 +108,9 @@ export function LayananMaklonPage() {
       </section>
 
       {/* B. Siapa yang Dapat Bekerja Sama? */}
-      <section className="bg-[#F5F3ED] py-16 sm:py-20 border-b border-[#E3E8E3]">
+      <section className="bg-[#F5F3ED] py-9 sm:py-12 border-b border-[#E3E8E3]">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <Reveal className="max-w-2xl space-y-3 mb-12">
+          <Reveal className="max-w-2xl space-y-2.5 mb-6">
             <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
               SEGMEN KEMITRAAN
             </p>
@@ -119,12 +119,12 @@ export function LayananMaklonPage() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {maklonTargetPartners.map((partner, idx) => (
               <Reveal
                 key={partner.number}
                 delay={idx * 0.05}
-                className="bg-white border border-[#E3E8E3] rounded-2xl p-6 sm:p-7 space-y-3 hover:border-[#183D32]/40 transition-colors"
+                className="bmmf-sheen-soft bg-white border border-[#E3E8E3] rounded-2xl p-5 sm:p-6 space-y-2.5 hover:border-[#183D32]/40 hover:-translate-y-1 hover:shadow-sm transition-all duration-300"
               >
                 <span className="font-mono text-xs font-medium text-[#183D32] tabular-nums">
                   {partner.number}
@@ -138,10 +138,10 @@ export function LayananMaklonPage() {
       </section>
 
       {/* C. Alur Kerja Sama (Timeline 7 Tahap) */}
-      <section className="bg-white py-16 sm:py-20 border-b border-[#E3E8E3]">
+      <section className="bg-white py-9 sm:py-12 border-b border-[#E3E8E3]">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
-            <div className="space-y-3 max-w-2xl">
+          <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+            <div className="space-y-2 max-w-2xl">
               <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
                 ALUR KERJA SAMA MAKLON
               </p>
@@ -157,7 +157,7 @@ export function LayananMaklonPage() {
 
           <div className="divide-y divide-[#E3E8E3] border-y border-[#E3E8E3]">
             {maklonTimelineSteps.map((item, idx) => (
-              <Reveal key={item.step} delay={idx * 0.03} className="py-6 sm:py-7">
+              <Reveal key={item.step} delay={idx * 0.03} className="py-4 sm:py-5">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8 items-start">
                   <div className="md:col-span-2">
                     <span className="font-mono text-sm font-semibold text-[#183D32] tabular-nums">
@@ -178,10 +178,10 @@ export function LayananMaklonPage() {
       </section>
 
       {/* D. FAQ Maklon */}
-      <section className="bg-[#F5F3ED] py-16 sm:py-20 border-b border-[#E3E8E3]">
+      <section className="bg-[#F5F3ED] py-9 sm:py-12 border-b border-[#E3E8E3]">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-            <Reveal className="lg:col-span-4 space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+            <Reveal className="lg:col-span-4 space-y-3">
               <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
                 PERTANYAAN UMUM
               </p>
@@ -194,7 +194,7 @@ export function LayananMaklonPage() {
               </p>
             </Reveal>
 
-            <div className="lg:col-span-8 space-y-3">
+            <div className="lg:col-span-8 space-y-2.5">
               {maklonFaqs.map((faq, idx) => {
                 const isOpen = openFaqIndex === idx;
                 return (
@@ -206,7 +206,7 @@ export function LayananMaklonPage() {
                       type="button"
                       onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
                       aria-expanded={isOpen}
-                      className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 hover:bg-[#F5F3ED]/40 transition-colors"
+                      className="w-full px-5 py-4 text-left flex items-center justify-between gap-4 hover:bg-[#F5F3ED]/40 transition-colors"
                     >
                       <span className="font-display font-semibold text-base sm:text-[17px] text-[#183D32]">
                         {faq.question}
@@ -219,7 +219,7 @@ export function LayananMaklonPage() {
                       />
                     </button>
                     {isOpen && (
-                      <div className="px-6 pb-5 pt-1 text-sm sm:text-[15px] text-[#27312D] leading-relaxed border-t border-[#E3E8E3]/70">
+                      <div className="px-5 pb-4 pt-1 text-sm sm:text-[15px] text-[#27312D] leading-relaxed border-t border-[#E3E8E3]/70">
                         {faq.answer}
                       </div>
                     )}
@@ -232,7 +232,7 @@ export function LayananMaklonPage() {
       </section>
 
       {/* E. CTA Maklon */}
-      <section className="bg-[#183D32] text-white py-16 sm:py-20">
+      <section className="bg-[#183D32] text-white py-9 sm:py-12">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
           <div className="space-y-3 max-w-2xl">
             <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#D3B785]">
@@ -249,10 +249,10 @@ export function LayananMaklonPage() {
           <div className="flex flex-wrap items-center gap-3.5 shrink-0">
             <Link
               to="/kontak?kebutuhan=Maklon"
-              className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-[#102B24] bg-[#D3B785] hover:bg-[#e1c99e] rounded-[11px] transition-colors whitespace-nowrap"
+              className="bmmf-sheen-gold bmmf-sheen-delay-1 group inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-[#102B24] bg-[#D3B785] hover:bg-[#e1c99e] rounded-[11px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap"
             >
               <span>Konsultasi dengan Tim BMMF</span>
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </Link>
             <a
               href={getWhatsAppMaklonUrl()}

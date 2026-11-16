@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useReducedMotion } from 'motion/react';
 import { ArrowRight, ExternalLink, MapPin } from 'lucide-react';
 import { companyConfig } from '../config/company';
 import { SeoHead } from '../components/SeoHead';
 import { Breadcrumb } from '../components/Breadcrumb';
-import { SafeImage } from '../components/SafeImage';
-import { Reveal } from '../components/MotionPrimitives';
+import { HeroEntrance, Reveal } from '../components/MotionPrimitives';
 
 const corporateValues = [
   {
@@ -55,6 +55,8 @@ const timelineEntries = [
 ];
 
 export function AboutPage() {
+  const prefersReduced = useReducedMotion();
+
   return (
     <>
       <SeoHead
@@ -65,51 +67,81 @@ export function AboutPage() {
       />
 
       {/* Page Header */}
-      <section className="bg-[#F5F3ED] border-b border-[#E3E8E3] py-12 sm:py-16 lg:py-20">
+      <section className="bg-[#F5F3ED] border-b border-[#E3E8E3] py-7 sm:py-10 lg:py-12">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <Breadcrumb items={[{ label: 'Tentang Kami' }]} />
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            <div className="lg:col-span-7 space-y-5">
-              <div className="flex items-center gap-3">
-                <img
-                  src={companyConfig.logo.src}
-                  alt={companyConfig.logo.alt}
-                  width={44}
-                  height={44}
-                  className="w-11 h-11 object-contain shrink-0"
-                />
-                <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#183D32]">
-                  PROFIL PERUSAHAAN · {companyConfig.shortName}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-10 items-center">
+            <div className="lg:col-span-6 space-y-4">
+              <HeroEntrance delay={0}>
+                <div className="flex items-center gap-3">
+                  <img
+                    src={companyConfig.logo.src}
+                    alt={companyConfig.logo.alt}
+                    width={44}
+                    height={44}
+                    className="w-11 h-11 object-contain shrink-0"
+                  />
+                  <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#183D32]">
+                    PROFIL PERUSAHAAN · {companyConfig.shortName}
+                  </p>
+                </div>
+              </HeroEntrance>
+              <HeroEntrance delay={0.06}>
+                <h1 className="font-display font-bold text-[#183D32] tracking-[-0.025em] leading-[1.1] text-[34px] sm:text-[44px] lg:text-[50px]">
+                  Industri Pengolahan Susu Kambing Etawa Bubuk yang Mengutamakan Ketertiban Proses.
+                </h1>
+              </HeroEntrance>
+              <HeroEntrance delay={0.12}>
+                <p className="text-base sm:text-lg text-[#27312D] leading-[1.7] max-w-2xl">
+                  {companyConfig.displayName} ({companyConfig.shortName}) berfokus pada pengolahan
+                  dan produksi susu kambing Etawa dalam bentuk bubuk—bukan peternakan umum ataupun
+                  toko eceran. Seluruh aktivitas perusahaan diarahkan untuk menjaga konsistensi mutu
+                  dan kesiapan kemitraan usaha.
                 </p>
-              </div>
-              <h1 className="font-display font-bold text-[#183D32] tracking-[-0.025em] leading-[1.1] text-[34px] sm:text-[44px] lg:text-[50px]">
-                Industri Pengolahan Susu Kambing Etawa Bubuk yang Mengutamakan Ketertiban Proses.
-              </h1>
-              <p className="text-base sm:text-lg text-[#27312D] leading-[1.7] max-w-2xl">
-                {companyConfig.displayName} ({companyConfig.shortName}) berfokus pada pengolahan
-                dan produksi susu kambing Etawa dalam bentuk bubuk—bukan peternakan umum ataupun
-                toko eceran. Seluruh aktivitas perusahaan diarahkan untuk menjaga konsistensi mutu
-                dan kesiapan kemitraan usaha.
-              </p>
+              </HeroEntrance>
             </div>
-            <div className="lg:col-span-5">
-              <SafeImage
-                src={companyConfig.media.intro.src}
-                alt={companyConfig.media.intro.alt}
-                caption={companyConfig.media.intro.caption}
-                isPlaceholder={companyConfig.media.intro.isPlaceholder}
-                aspectClassName="aspect-[4/3]"
-                priority
-              />
+            <div className="lg:col-span-6">
+              <HeroEntrance delay={0.14}>
+                <figure className="w-full">
+                  <div className="relative">
+                    <div
+                      aria-hidden="true"
+                      className="bmmf-glow-breathe hidden sm:block absolute -top-3 -right-3 w-20 h-20 border-t-2 border-r-2 border-[#D3B785] rounded-tr-2xl pointer-events-none"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="bmmf-glow-breathe hidden sm:block absolute -bottom-3 -left-3 w-20 h-20 border-b-2 border-l-2 border-[#183D32]/35 rounded-bl-2xl pointer-events-none"
+                    />
+                    <div className="relative overflow-hidden bg-white border border-[#E3E8E3] rounded-xl aspect-video">
+                      <video
+                        src={companyConfig.media.aboutHeroVideo.src}
+                        aria-label={companyConfig.media.aboutHeroVideo.alt}
+                        autoPlay={!prefersReduced}
+                        controls={Boolean(prefersReduced)}
+                        loop
+                        muted
+                        playsInline
+                        preload="metadata"
+                        className="block w-full h-full object-contain"
+                      >
+                        Browser Anda tidak mendukung pemutaran video HTML5.
+                      </video>
+                    </div>
+                  </div>
+                  <figcaption className="mt-2.5 text-xs text-[#737D77] leading-relaxed text-center sm:text-left">
+                    {companyConfig.media.aboutHeroVideo.caption}
+                  </figcaption>
+                </figure>
+              </HeroEntrance>
             </div>
           </div>
         </div>
       </section>
 
       {/* B. Company Journey */}
-      <section className="bg-white py-16 sm:py-20 border-b border-[#E3E8E3]">
+      <section className="bg-white py-9 sm:py-12 border-b border-[#E3E8E3]">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <Reveal className="max-w-2xl space-y-3 mb-12">
+          <Reveal className="max-w-2xl space-y-2.5 mb-6">
             <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
               PERJALANAN PERUSAHAAN
             </p>
@@ -124,7 +156,7 @@ export function AboutPage() {
 
           <div className="divide-y divide-[#E3E8E3] border-y border-[#E3E8E3]">
             {timelineEntries.map((entry, idx) => (
-              <Reveal key={entry.year} delay={idx * 0.05} className="py-8">
+              <Reveal key={entry.year} delay={idx * 0.05} className="py-5">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start">
                   <div className="md:col-span-3">
                     <span className="font-display font-bold text-xl sm:text-2xl text-[#183D32] tabular-nums">
@@ -147,9 +179,9 @@ export function AboutPage() {
       </section>
 
       {/* C. Visi dan Misi */}
-      <section className="bg-[#F5F3ED] py-16 sm:py-20 border-b border-[#E3E8E3]">
+      <section className="bg-[#F5F3ED] py-9 sm:py-12 border-b border-[#E3E8E3]">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <Reveal className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <Reveal className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div className="space-y-2">
               <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
                 ARAH PERUSAHAAN
@@ -164,8 +196,8 @@ export function AboutPage() {
             </p>
           </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <Reveal className="lg:col-span-5 bg-[#183D32] text-white rounded-2xl p-8 sm:p-10 space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
+            <Reveal className="bmmf-sheen lg:col-span-5 bg-[#183D32] text-white rounded-2xl p-6 sm:p-8 space-y-3">
               <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#D3B785]">
                 VISI (RANCANGAN)
               </p>
@@ -177,7 +209,7 @@ export function AboutPage() {
 
             <Reveal
               delay={0.08}
-              className="lg:col-span-7 bg-white border border-[#E3E8E3] rounded-2xl p-8 sm:p-10 space-y-5"
+              className="lg:col-span-7 bg-white border border-[#E3E8E3] rounded-2xl p-6 sm:p-8 space-y-4"
             >
               <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
                 MISI (RANCANGAN)
@@ -208,9 +240,9 @@ export function AboutPage() {
       </section>
 
       {/* D. Nilai Perusahaan */}
-      <section className="bg-white py-16 sm:py-20 border-b border-[#E3E8E3]">
+      <section className="bg-white py-9 sm:py-12 border-b border-[#E3E8E3]">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <Reveal className="max-w-2xl space-y-3 mb-12">
+          <Reveal className="max-w-2xl space-y-2.5 mb-6">
             <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
               NILAI KERJA BMMF
             </p>
@@ -219,12 +251,12 @@ export function AboutPage() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {corporateValues.map((val, idx) => (
               <Reveal
                 key={val.title}
                 delay={idx * 0.05}
-                className="border border-[#E3E8E3] rounded-2xl p-6 sm:p-7 space-y-3 hover:border-[#183D32]/40 transition-colors"
+                className="bmmf-sheen-soft border border-[#E3E8E3] rounded-2xl p-5 sm:p-6 space-y-2.5 hover:border-[#183D32]/40 hover:-translate-y-1 hover:shadow-sm transition-all duration-300"
               >
                 <span className="font-mono text-xs text-[#737D77] tabular-nums">{val.number}</span>
                 <h3 className="font-display font-bold text-xl text-[#183D32]">{val.title}</h3>
@@ -236,9 +268,9 @@ export function AboutPage() {
       </section>
 
       {/* E. Lokasi Kantor dan Lokasi Produksi */}
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-white py-9 sm:py-12">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <Reveal className="max-w-2xl space-y-3 mb-10">
+          <Reveal className="max-w-2xl space-y-2.5 mb-6">
             <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
               LOKASI OPERASIONAL
             </p>
@@ -253,11 +285,11 @@ export function AboutPage() {
             </p>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
             {[companyConfig.locations.office, companyConfig.locations.production].map((loc) => (
               <Reveal
                 key={loc.title}
-                className="bg-[#F5F3ED] border border-[#E3E8E3] rounded-2xl p-7 sm:p-8 flex flex-col justify-between space-y-6"
+                className="bg-[#F5F3ED] border border-[#E3E8E3] rounded-2xl p-5 sm:p-6 flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-3">
                   <div className="flex items-center gap-2.5 text-[#183D32]">
@@ -290,7 +322,7 @@ export function AboutPage() {
             ))}
           </div>
 
-          <Reveal className="mt-12 pt-8 border-t border-[#E3E8E3] flex flex-wrap items-center justify-between gap-4">
+          <Reveal className="mt-7 pt-5 border-t border-[#E3E8E3] flex flex-wrap items-center justify-between gap-4">
             <p className="text-sm text-[#737D77]">
               Tertarik menjajaki layanan maklon atau pengadaan produk susu bubuk bersama BMMF?
             </p>
@@ -303,10 +335,10 @@ export function AboutPage() {
               </Link>
               <Link
                 to="/kontak?kebutuhan=Maklon"
-                className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[10px] transition-colors"
+                className="bmmf-sheen bmmf-sheen-delay-1 group inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[10px] transition-all duration-200 hover:-translate-y-[1px]"
               >
                 <span>Konsultasi Kerja Sama</span>
-                <ArrowRight className="w-4 h-4 text-[#D3B785]" aria-hidden="true" />
+                <ArrowRight className="w-4 h-4 text-[#D3B785] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
               </Link>
             </div>
           </Reveal>

@@ -36,11 +36,11 @@ export function ProductsPage() {
       />
 
       {/* Header */}
-      <section className="bg-[#F5F3ED] border-b border-[#E3E8E3] py-12 sm:py-16 lg:py-20">
+      <section className="bg-[#F5F3ED] border-b border-[#E3E8E3] py-7 sm:py-10 lg:py-12">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <Breadcrumb items={[{ label: 'Produk Susu Bubuk' }]} />
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            <div className="lg:col-span-7 space-y-5">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-10 items-center">
+            <div className="lg:col-span-7 space-y-4">
               <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#183D32]">
                 KATALOG PRODUK B2B
               </p>
@@ -55,10 +55,10 @@ export function ProductsPage() {
               <div className="flex flex-wrap items-center gap-3.5 pt-2">
                 <Link
                   to="/kontak?kebutuhan=Pemesanan%20Susu%20Bubuk"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[11px] transition-colors whitespace-nowrap"
+                  className="bmmf-sheen group inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[11px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap"
                 >
                   <span>Minta Penawaran Bisnis</span>
-                  <ArrowRight className="w-4 h-4 text-[#D3B785]" aria-hidden="true" />
+                  <ArrowRight className="w-4 h-4 text-[#D3B785] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
                 </Link>
                 <a
                   href={getWhatsAppProductUrl()}
@@ -74,10 +74,10 @@ export function ProductsPage() {
 
             <div className="lg:col-span-5">
               <SafeImage
-                src={companyConfig.media.productSample.src}
-                alt={companyConfig.media.productSample.alt}
-                caption={companyConfig.media.productSample.caption}
-                isPlaceholder={companyConfig.media.productSample.isPlaceholder}
+                src={companyConfig.media.productsHeader.src}
+                alt={companyConfig.media.productsHeader.alt}
+                caption={companyConfig.media.productsHeader.caption}
+                isPlaceholder={companyConfig.media.productsHeader.isPlaceholder}
                 aspectClassName="aspect-[4/3]"
                 priority
               />
@@ -87,9 +87,9 @@ export function ProductsPage() {
       </section>
 
       {/* Filter & B2B Catalog */}
-      <section className="bg-white py-14 sm:py-20 border-b border-[#E3E8E3]">
-        <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#E3E8E3]">
+      <section className="bg-white py-8 sm:py-11 border-b border-[#E3E8E3]">
+        <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#E3E8E3]">
             <div className="flex flex-wrap items-center gap-2">
               {productCategories.map((category) => {
                 const isActive = selectedCategory === category;
@@ -130,13 +130,13 @@ export function ProductsPage() {
           </div>
 
           {filteredProducts.length > 0 ? (
-            <div className="space-y-8">
+            <div className="space-y-5">
               {filteredProducts.map((product) => (
                 <Reveal
                   key={product.id}
                   className="border border-[#E3E8E3] rounded-2xl overflow-hidden bg-white"
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 sm:p-8 lg:p-10 items-start">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-5 sm:p-6 lg:p-7 items-start">
                     <div className="lg:col-span-5">
                       <SafeImage
                         src={product.imageSrc}
@@ -236,7 +236,7 @@ export function ProductsPage() {
           )}
 
           {/* Transparansi Katalog & Pengalihan Maklon */}
-          <Reveal className="bg-[#F5F3ED] border border-[#E3E8E3] rounded-2xl p-7 sm:p-9 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <Reveal className="bg-[#F5F3ED] border border-[#E3E8E3] rounded-2xl p-5 sm:p-7 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
             <div className="space-y-2 max-w-2xl">
               <h2 className="font-display font-bold text-xl sm:text-2xl text-[#183D32]">
                 Membutuhkan Produk dengan Merek Sendiri?
@@ -248,10 +248,10 @@ export function ProductsPage() {
             </div>
             <Link
               to="/layanan-maklon"
-              className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[10px] transition-colors whitespace-nowrap shrink-0"
+              className="bmmf-sheen bmmf-sheen-delay-1 group inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[10px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap shrink-0"
             >
               <span>Lihat Layanan Maklon</span>
-              <ArrowRight className="w-4 h-4 text-[#D3B785]" aria-hidden="true" />
+              <ArrowRight className="w-4 h-4 text-[#D3B785] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </Link>
           </Reveal>
         </div>

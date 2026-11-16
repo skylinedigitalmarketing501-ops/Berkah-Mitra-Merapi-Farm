@@ -38,7 +38,7 @@ export const productionStages: ProductionStage[] = [
       'Pemeriksaan kondisi fisik dan keutuhan kemasan',
       'Penempatan bahan sesuai kategori penyimpanan',
     ],
-    image: companyConfig.media.intro,
+    image: companyConfig.media.stageMaterialReceive,
   },
   {
     stepNumber: '02',
@@ -52,7 +52,7 @@ export const productionStages: ProductionStage[] = [
       'Peralatan kontak bahan dijaga kebersihannya sebelum pemakaian',
       'Pemisahan area kerja untuk meminimalkan kontaminasi silang',
     ],
-    image: companyConfig.media.productSample,
+    image: companyConfig.media.stagePrecisionWeigh,
   },
   {
     stepNumber: '03',
@@ -80,7 +80,7 @@ export const productionStages: ProductionStage[] = [
       'Pencatatan hasil pemeriksaan pada lembar kontrol mutu',
       'Penahanan sementara apabila ditemukan ketidaksesuaian prosedur',
     ],
-    image: companyConfig.media.teamWorkplace,
+    image: companyConfig.media.stageProcessInspect,
   },
   {
     stepNumber: '05',
@@ -94,7 +94,7 @@ export const productionStages: ProductionStage[] = [
       'Kontrol berat bersih pada setiap unit kemasan',
       'Verifikasi kerapatan segel dan penandaan kode produksi',
     ],
-    image: companyConfig.media.hero,
+    image: companyConfig.media.stagePackageSeal,
   },
   {
     stepNumber: '06',
@@ -108,7 +108,7 @@ export const productionStages: ProductionStage[] = [
       'Penataan penyimpanan dengan prinsip sirkulasi stok yang teratur',
       'Pengecekan kondisi akhir sebelum penyerahan kepada mitra',
     ],
-    image: companyConfig.media.intro,
+    image: companyConfig.media.stageWarehouseRack,
   },
 ];
 

@@ -54,9 +54,9 @@ export function HomePage() {
 
       {/* SECTION 1 — HERO */}
       <section className="relative bg-white border-b border-[#E3E8E3]">
-        <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            <div className="lg:col-span-6 space-y-6">
+        <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 py-7 sm:py-10 lg:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-9 items-center">
+            <div className="lg:col-span-6 space-y-4 sm:space-y-5">
               <HeroEntrance delay={0}>
                 <p className="text-xs sm:text-[13px] font-medium tracking-[0.14em] uppercase text-[#183D32]">
                   MANUFAKTUR & MAKLON SUSU BUBUK
@@ -81,14 +81,14 @@ export function HomePage() {
                 <div className="flex flex-wrap items-center gap-3.5 pt-2">
                   <Link
                     to="/layanan-maklon"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-[15px] font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[11px] transition-colors duration-200 whitespace-nowrap"
+                    className="bmmf-sheen group inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-[15px] font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[11px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap"
                   >
                     <span>Konsultasi Maklon</span>
-                    <ArrowRight className="w-4 h-4 text-[#D3B785]" aria-hidden="true" />
+                    <ArrowRight className="w-4 h-4 text-[#D3B785] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
                   </Link>
                   <Link
                     to="/produk-susu-bubuk"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-[15px] font-medium text-[#183D32] bg-white hover:bg-[#F5F3ED] border border-[#E3E8E3] rounded-[11px] transition-colors duration-200 whitespace-nowrap"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-[15px] font-medium text-[#183D32] bg-white hover:bg-[#F5F3ED] border border-[#E3E8E3] rounded-[11px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap"
                   >
                     <span>Jelajahi Produk</span>
                   </Link>
@@ -106,24 +106,36 @@ export function HomePage() {
 
             <div className="lg:col-span-6">
               <HeroEntrance delay={0.14}>
-                <div className="relative">
-                  <div
-                    aria-hidden="true"
-                    className="hidden sm:block absolute -top-3 -right-3 w-24 h-24 border-t-2 border-r-2 border-[#D3B785] rounded-tr-2xl pointer-events-none"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="hidden sm:block absolute -bottom-3 -left-3 w-24 h-24 border-b-2 border-l-2 border-[#183D32]/30 rounded-bl-2xl pointer-events-none"
-                  />
-                  <SafeImage
-                    src={companyConfig.media.hero.src}
-                    alt={companyConfig.media.hero.alt}
-                    caption={companyConfig.media.hero.caption}
-                    isPlaceholder={companyConfig.media.hero.isPlaceholder}
-                    aspectClassName="aspect-[16/11] lg:aspect-[4/3]"
-                    priority
-                  />
-                </div>
+                <figure className="w-full">
+                  <div className="relative">
+                    <div
+                      aria-hidden="true"
+                      className="bmmf-glow-breathe hidden sm:block absolute -top-3 -right-3 w-20 h-20 border-t-2 border-r-2 border-[#D3B785] rounded-tr-2xl pointer-events-none"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="bmmf-glow-breathe hidden sm:block absolute -bottom-3 -left-3 w-20 h-20 border-b-2 border-l-2 border-[#183D32]/35 rounded-bl-2xl pointer-events-none"
+                    />
+                    <div className="relative overflow-hidden bg-[#F5F3ED] border border-[#E3E8E3] rounded-xl aspect-video">
+                      <video
+                        src={companyConfig.media.heroVideo.src}
+                        aria-label={companyConfig.media.heroVideo.alt}
+                        autoPlay={!prefersReduced}
+                        controls={Boolean(prefersReduced)}
+                        loop
+                        muted
+                        playsInline
+                        preload="metadata"
+                        className="block w-full h-full object-contain"
+                      >
+                        Browser Anda tidak mendukung pemutaran video HTML5.
+                      </video>
+                    </div>
+                  </div>
+                  <figcaption className="mt-2.5 text-xs text-[#737D77] leading-relaxed text-center sm:text-left">
+                    {companyConfig.media.heroVideo.caption}
+                  </figcaption>
+                </figure>
               </HeroEntrance>
             </div>
           </div>
@@ -131,9 +143,9 @@ export function HomePage() {
       </section>
 
       {/* SECTION 2 — COMPANY INTRODUCTION */}
-      <section className="bg-white py-16 sm:py-20 lg:py-24">
+      <section className="bg-white py-9 sm:py-12 lg:py-14">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-10 items-center">
             <Reveal className="lg:col-span-5 order-2 lg:order-1">
               <SafeImage
                 src={companyConfig.media.intro.src}
@@ -144,7 +156,7 @@ export function HomePage() {
               />
             </Reveal>
 
-            <Reveal delay={0.08} className="lg:col-span-7 order-1 lg:order-2 space-y-6">
+            <Reveal delay={0.08} className="lg:col-span-7 order-1 lg:order-2 space-y-4">
               <p className="text-xs sm:text-[13px] font-medium tracking-[0.14em] uppercase text-[#737D77]">
                 MENGENAL BMMF
               </p>
@@ -182,15 +194,15 @@ export function HomePage() {
       </section>
 
       {/* SECTION 3 — COMPANY HIGHLIGHTS */}
-      <section className="bg-[#F5F3ED] border-y border-[#E3E8E3] py-14 sm:py-16">
+      <section className="bg-[#F5F3ED] border-y border-[#E3E8E3] py-8 sm:py-10">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-6 border-b border-[#E3E8E3]">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-[#E3E8E3]">
               <div>
                 <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
                   RINGKASAN PROFIL PERUSAHAAN
                 </p>
-                <h2 className="font-display font-bold text-[#183D32] text-2xl sm:text-3xl mt-2">
+                <h2 className="font-display font-bold text-[#183D32] text-2xl sm:text-3xl mt-1.5">
                   Identitas Operasional & Fokus Layanan
                 </h2>
               </div>
@@ -200,7 +212,7 @@ export function HomePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
               {companyConfig.highlights.map((item) => (
                 <div key={item.id} className="space-y-2 border-t border-[#183D32]/15 pt-5">
                   <p className="text-xs font-medium text-[#737D77]">{item.label}</p>
@@ -218,9 +230,9 @@ export function HomePage() {
       </section>
 
       {/* SECTION 4 — OUR SERVICES */}
-      <section className="bg-white py-16 sm:py-20 lg:py-28 border-b border-[#E3E8E3]">
+      <section className="bg-white py-9 sm:py-12 lg:py-14 border-b border-[#E3E8E3]">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <Reveal className="max-w-2xl space-y-4 mb-12 lg:mb-14">
+          <Reveal className="max-w-2xl space-y-2.5 mb-7 lg:mb-8">
             <p className="text-xs sm:text-[13px] font-medium tracking-[0.14em] uppercase text-[#737D77]">
               LAYANAN KAMI
             </p>
@@ -229,10 +241,10 @@ export function HomePage() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
             {/* Layanan 1: Layanan Maklon Susu Bubuk */}
-            <Reveal className="lg:col-span-6 border border-[#E3E8E3] rounded-2xl overflow-hidden bg-white hover:border-[#183D32]/40 transition-colors flex flex-col justify-between">
-              <div className="p-7 sm:p-9 space-y-4">
+            <Reveal className="bmmf-sheen-soft lg:col-span-6 border border-[#E3E8E3] rounded-2xl overflow-hidden bg-white hover:border-[#183D32]/40 hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+              <div className="p-5 sm:p-7 space-y-3.5">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs font-medium text-[#183D32] tabular-nums">
                     01
@@ -249,17 +261,17 @@ export function HomePage() {
                 <div className="pt-2">
                   <Link
                     to="/layanan-maklon"
-                    className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[10px] transition-colors whitespace-nowrap"
+                    className="bmmf-sheen bmmf-sheen-delay-1 group inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[10px] transition-colors whitespace-nowrap"
                   >
                     <span>Pelajari Layanan Maklon</span>
-                    <ArrowRight className="w-4 h-4 text-[#D3B785]" aria-hidden="true" />
+                    <ArrowRight className="w-4 h-4 text-[#D3B785] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
                   </Link>
                 </div>
               </div>
-              <div className="px-7 sm:px-9 pb-7 sm:pb-9">
+              <div className="px-5 sm:px-7 pb-5 sm:pb-7">
                 <SafeImage
-                  src={companyConfig.media.productionShowcase.src}
-                  alt={companyConfig.media.productionShowcase.alt}
+                  src={companyConfig.media.serviceMaklon.src}
+                  alt={companyConfig.media.serviceMaklon.alt}
                   aspectClassName="aspect-[16/9]"
                   caption=""
                 />
@@ -269,9 +281,9 @@ export function HomePage() {
             {/* Layanan 2: Pemesanan Susu Bubuk */}
             <Reveal
               delay={0.06}
-              className="lg:col-span-6 border border-[#E3E8E3] rounded-2xl overflow-hidden bg-[#F5F3ED]/60 hover:border-[#183D32]/40 transition-colors flex flex-col justify-between"
+              className="bmmf-sheen-soft bmmf-sheen-delay-2 lg:col-span-6 border border-[#E3E8E3] rounded-2xl overflow-hidden bg-[#F5F3ED]/60 hover:border-[#183D32]/40 hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="p-7 sm:p-9 space-y-4">
+              <div className="p-5 sm:p-7 space-y-3.5">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs font-medium text-[#183D32] tabular-nums">
                     02
@@ -295,10 +307,10 @@ export function HomePage() {
                   </Link>
                 </div>
               </div>
-              <div className="px-7 sm:px-9 pb-7 sm:pb-9">
+              <div className="px-5 sm:px-7 pb-5 sm:pb-7">
                 <SafeImage
-                  src={companyConfig.media.productSample.src}
-                  alt={companyConfig.media.productSample.alt}
+                  src={companyConfig.media.serviceB2bOrder.src}
+                  alt={companyConfig.media.serviceB2bOrder.alt}
                   aspectClassName="aspect-[16/9]"
                   caption=""
                 />
@@ -309,10 +321,10 @@ export function HomePage() {
       </section>
 
       {/* SECTION 5 — WHY PARTNER WITH BMMF */}
-      <section className="bg-white py-16 sm:py-20 lg:py-28">
+      <section className="bg-white py-9 sm:py-12 lg:py-14">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            <Reveal className="lg:col-span-5 space-y-5 lg:sticky lg:top-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+            <Reveal className="lg:col-span-5 space-y-4 lg:sticky lg:top-24">
               <p className="text-xs sm:text-[13px] font-medium tracking-[0.14em] uppercase text-[#737D77]">
                 KEUNGGULAN KEMITRAAN
               </p>
@@ -337,12 +349,12 @@ export function HomePage() {
 
             <div className="lg:col-span-7 divide-y divide-[#E3E8E3] border-y border-[#E3E8E3]">
               {whyPartnerPoints.map((item, idx) => (
-                <Reveal key={item.number} delay={idx * 0.04} className="py-6 sm:py-7">
-                  <div className="flex items-start gap-5 sm:gap-7">
+                <Reveal key={item.number} delay={idx * 0.04} className="py-4 sm:py-5">
+                  <div className="flex items-start gap-4 sm:gap-6">
                     <span className="font-mono text-sm font-medium text-[#183D32] tabular-nums pt-1">
                       {item.number}
                     </span>
-                    <div className="space-y-1.5">
+                    <div className="space-y-1">
                       <h3 className="font-display font-semibold text-lg sm:text-xl text-[#183D32]">
                         {item.title}
                       </h3>
@@ -358,10 +370,10 @@ export function HomePage() {
 
       {/* SECTION 6 — PRODUCTION OVERVIEW */}
       <section ref={showcaseRef} className="relative overflow-hidden bg-[#102B24] text-white">
-        <div className="relative min-h-[460px] sm:min-h-[540px] lg:min-h-[580px] flex items-end">
+        <div className="relative min-h-[340px] sm:min-h-[390px] lg:min-h-[420px] flex items-end">
           <motion.img
-            src={companyConfig.media.productionShowcase.src}
-            alt={companyConfig.media.productionShowcase.alt}
+            src={companyConfig.media.hero.src}
+            alt={companyConfig.media.hero.alt}
             referrerPolicy="no-referrer"
             style={prefersReduced ? undefined : { scale: imageScale }}
             className="absolute inset-0 w-full h-full object-cover opacity-55 will-change-transform"
@@ -370,7 +382,7 @@ export function HomePage() {
             aria-hidden="true"
             className="absolute inset-0 bg-gradient-to-t from-[#102B24] via-[#102B24]/65 to-[#102B24]/30"
           />
-          <div className="relative z-10 w-full mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+          <div className="relative z-10 w-full mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 py-9 sm:py-12">
             <Reveal className="max-w-2xl space-y-5">
               <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#D3B785]">
                 PROSES PRODUKSI & KUALITAS
@@ -385,10 +397,10 @@ export function HomePage() {
               <div className="pt-2 flex flex-wrap items-center gap-3.5">
                 <Link
                   to="/proses-produksi"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-[15px] font-medium text-[#102B24] bg-[#D3B785] hover:bg-[#e1c99e] rounded-[11px] transition-colors duration-200 whitespace-nowrap"
+                  className="bmmf-sheen-gold group inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-[15px] font-medium text-[#102B24] bg-[#D3B785] hover:bg-[#e1c99e] rounded-[11px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap"
                 >
                   <span>Lihat Proses Produksi</span>
-                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                  <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
                 </Link>
                 <Link
                   to="/kualitas"
@@ -403,10 +415,10 @@ export function HomePage() {
       </section>
 
       {/* SECTION 7 — BUSINESS PARTNERSHIP CTA */}
-      <section className="bg-[#183D32] text-white py-16 sm:py-20 lg:py-24 border-t border-white/10">
+      <section className="bg-[#183D32] text-white py-9 sm:py-12 lg:py-14 border-t border-white/10">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <Reveal className="lg:col-span-8 space-y-5">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 items-center">
+            <Reveal className="lg:col-span-8 space-y-4">
               <p className="text-xs sm:text-[13px] font-medium tracking-[0.14em] uppercase text-[#D3B785]">
                 MULAI KERJA SAMA B2B
               </p>
@@ -420,10 +432,10 @@ export function HomePage() {
               <div className="flex flex-wrap items-center gap-3.5 pt-2">
                 <Link
                   to="/kontak?kebutuhan=Maklon"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-[15px] font-medium text-[#102B24] bg-[#D3B785] hover:bg-[#e1c99e] rounded-[11px] transition-colors duration-200 whitespace-nowrap"
+                  className="bmmf-sheen-gold bmmf-sheen-delay-1 group inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-[15px] font-medium text-[#102B24] bg-[#D3B785] hover:bg-[#e1c99e] rounded-[11px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap"
                 >
                   <span>Mulai Konsultasi Maklon</span>
-                  <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+                  <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
                 </Link>
                 <Link
                   to="/kontak?kebutuhan=Pemesanan%20Susu%20Bubuk"
@@ -444,7 +456,7 @@ export function HomePage() {
             </Reveal>
 
             <Reveal delay={0.08} className="lg:col-span-4">
-              <div className="bg-[#102B24] border border-white/15 rounded-2xl p-6 sm:p-7 space-y-4">
+              <div className="bmmf-sheen bmmf-sheen-delay-2 bg-[#102B24] border border-white/15 rounded-2xl p-6 sm:p-7 space-y-4">
                 <div className="flex items-center gap-3 pb-3 border-b border-white/10">
                   <span className="w-10 h-10 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0">
                     <img

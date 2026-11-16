@@ -14,7 +14,7 @@ export function ArticleDetailPage() {
 
   if (!article) {
     return (
-      <section className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 py-20 text-center space-y-4">
+      <section className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 py-12 text-center space-y-4">
         <h1 className="font-display font-bold text-3xl text-[#183D32]">Artikel Tidak Ditemukan</h1>
         <p className="text-sm text-[#737D77]">
           Tautan artikel yang Anda buka mungkin telah diperbarui atau tidak tersedia.
@@ -65,11 +65,11 @@ export function ArticleDetailPage() {
         ]}
       />
 
-      <article className="bg-white py-12 sm:py-16">
+      <article className="bg-white py-7 sm:py-10">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <Breadcrumb items={[{ label: 'Artikel', path: '/artikel' }, { label: article.title }]} />
 
-          <header className="space-y-5 pb-8 border-b border-[#E3E8E3]">
+          <header className="space-y-4 pb-5 border-b border-[#E3E8E3]">
             <div className="flex flex-wrap items-center gap-2 text-xs text-[#737D77]">
               <span className="font-semibold text-[#183D32]">{article.category}</span>
               <span aria-hidden="true">·</span>
@@ -117,7 +117,7 @@ export function ArticleDetailPage() {
             </div>
           </header>
 
-          <div className="py-8">
+          <div className="py-5">
             <SafeImage
               src={article.coverImage}
               alt={article.coverAlt}
@@ -126,13 +126,13 @@ export function ArticleDetailPage() {
             />
           </div>
 
-          <div className="space-y-6 text-base sm:text-[17px] text-[#27312D] leading-[1.8]">
+          <div className="space-y-4 text-base sm:text-[17px] text-[#27312D] leading-[1.75]">
             {article.body.map((paragraph, idx) => (
               <p key={idx}>{paragraph}</p>
             ))}
           </div>
 
-          <div className="mt-12 pt-8 border-t border-[#E3E8E3]">
+          <div className="mt-8 pt-5 border-t border-[#E3E8E3]">
             <Link
               to="/artikel"
               className="inline-flex items-center gap-2 text-sm font-semibold text-[#183D32] hover:underline"
@@ -145,8 +145,8 @@ export function ArticleDetailPage() {
       </article>
 
       {/* Related Posts */}
-      <section className="bg-[#F5F3ED] border-t border-[#E3E8E3] py-14">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 space-y-6">
+      <section className="bg-[#F5F3ED] border-t border-[#E3E8E3] py-8 sm:py-10">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 space-y-4">
           <h2 className="font-display font-bold text-xl sm:text-2xl text-[#183D32]">
             Artikel Terkait
           </h2>

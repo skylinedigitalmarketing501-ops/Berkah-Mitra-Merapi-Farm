@@ -152,8 +152,8 @@ export function ContactPage() {
       />
 
       {/* Header */}
-      <section className="bg-[#F5F3ED] border-b border-[#E3E8E3] py-12 sm:py-16">
-        <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 space-y-4">
+      <section className="bg-[#F5F3ED] border-b border-[#E3E8E3] py-7 sm:py-9">
+        <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 space-y-3">
           <Breadcrumb items={[{ label: 'Kontak' }]} />
           <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#183D32]">
             PERMINTAAN PENAWARAN & KONSULTASI B2B
@@ -169,12 +169,12 @@ export function ContactPage() {
       </section>
 
       {/* Two-Column Layout */}
-      <section className="bg-white py-14 sm:py-20">
+      <section className="bg-white py-8 sm:py-11">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-9 items-start">
             {/* Kolom Kiri: Info Perusahaan & Lokasi */}
-            <div id="lokasi" className="lg:col-span-5 space-y-6 scroll-mt-24">
-              <Reveal className="border border-[#E3E8E3] rounded-2xl p-6 sm:p-8 space-y-6 bg-[#F5F3ED]/60">
+            <div id="lokasi" className="lg:col-span-5 space-y-4 scroll-mt-24">
+              <Reveal className="bmmf-sheen-soft border border-[#E3E8E3] rounded-2xl p-5 sm:p-6 space-y-4 bg-[#F5F3ED]/60">
                 <div className="flex items-center gap-3.5">
                   <div className="w-12 h-12 rounded-xl bg-white border border-[#E3E8E3] p-1.5 flex items-center justify-center shrink-0">
                     <img
@@ -263,7 +263,7 @@ export function ContactPage() {
 
               <Reveal
                 delay={0.06}
-                className="border border-[#E3E8E3] rounded-2xl p-6 sm:p-7 space-y-4 bg-white"
+                className="border border-[#E3E8E3] rounded-2xl p-5 sm:p-6 space-y-3.5 bg-white"
               >
                 <div className="space-y-1.5">
                   <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[#737D77]">
@@ -314,9 +314,9 @@ export function ContactPage() {
             {/* Kolom Kanan: Formulir Permintaan Penawaran B2B */}
             <Reveal
               delay={0.08}
-              className="lg:col-span-7 border border-[#E3E8E3] rounded-2xl p-6 sm:p-9 lg:p-10 bg-white"
+              className="lg:col-span-7 border border-[#E3E8E3] rounded-2xl p-5 sm:p-7 bg-white"
             >
-              <div className="space-y-2 mb-7 pb-5 border-b border-[#E3E8E3]">
+              <div className="space-y-1.5 mb-5 pb-4 border-b border-[#E3E8E3]">
                 <h2 className="font-display font-bold text-2xl text-[#183D32]">
                   Formulir Permintaan Penawaran
                 </h2>
@@ -326,7 +326,7 @@ export function ContactPage() {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                 {/* Honeypot */}
                 <div className="hidden" aria-hidden="true">
                   <label htmlFor="b2b-website-url">Website</label>
@@ -559,7 +559,7 @@ export function ContactPage() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] disabled:opacity-60 rounded-[10px] transition-colors whitespace-nowrap"
+                    className="bmmf-sheen inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] disabled:opacity-60 rounded-[10px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap"
                   >
                     <Send className="w-4 h-4 text-[#D3B785]" aria-hidden="true" />
                     <span>

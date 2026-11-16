@@ -8,8 +8,8 @@ export function Footer() {
 
   return (
     <footer className="bg-[#102B24] text-white border-t border-[#183D32]">
-      <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 py-14 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+      <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 py-9 lg:py-11">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6">
           {/* Kolom 1: Logo & Deskripsi Singkat */}
           <div className="lg:col-span-4 space-y-4">
             <Link to="/" className="inline-flex items-center gap-3">
@@ -144,7 +144,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-white/60">
+        <div className="mt-8 pt-5 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-white/60">
           <p>
             © {currentYear} {companyConfig.officialName}. Seluruh hak cipta dilindungi.
           </p>

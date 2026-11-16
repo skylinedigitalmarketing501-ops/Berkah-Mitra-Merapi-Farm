@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check } from 'lucide-react';
+import { companyConfig } from '../config/company';
 import { productionStages } from '../data/production';
 import { SeoHead } from '../components/SeoHead';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { SafeImage } from '../components/SafeImage';
-import { Reveal } from '../components/MotionPrimitives';
+import { HeroEntrance, Reveal } from '../components/MotionPrimitives';
 
 export function ProductionProcessPage() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -29,22 +30,59 @@ export function ProductionProcessPage() {
       />
 
       {/* Header */}
-      <section className="bg-[#F5F3ED] border-b border-[#E3E8E3] py-12 sm:py-16 lg:py-20">
+      <section className="bg-[#F5F3ED] border-b border-[#E3E8E3] py-7 sm:py-10 lg:py-12">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <Breadcrumb items={[{ label: 'Proses Produksi' }]} />
-          <div className="max-w-3xl space-y-5">
-            <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#183D32]">
-              ALUR KERJA MANUFAKTUR
-            </p>
-            <h1 className="font-display font-bold text-[#183D32] tracking-[-0.025em] leading-[1.1] text-[34px] sm:text-[44px] lg:text-[50px]">
-              Tahapan Pengolahan Susu Kambing Etawa Bubuk yang Terstruktur.
-            </h1>
-            <p className="text-base sm:text-lg text-[#27312D] leading-[1.7]">
-              Pelajari bagaimana kegiatan pengolahan, penimbangan, pencampuran, hingga penanganan
-              kemasan dijalankan secara tertib agar calon mitra maklon dan pembeli B2B memperoleh
-              gambaran operasional yang jelas. Urutan final maupun rincian teknis tetap mengacu
-              pada SOP operasional resmi yang berlaku di BMMF.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-10 items-center">
+            <div className="lg:col-span-6 space-y-4">
+              <HeroEntrance delay={0}>
+                <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#183D32]">
+                  ALUR KERJA MANUFAKTUR
+                </p>
+              </HeroEntrance>
+              <HeroEntrance delay={0.06}>
+                <h1 className="font-display font-bold text-[#183D32] tracking-[-0.025em] leading-[1.1] text-[34px] sm:text-[44px] lg:text-[50px]">
+                  Tahapan Pengolahan Susu Kambing Etawa Bubuk yang Terstruktur.
+                </h1>
+              </HeroEntrance>
+              <HeroEntrance delay={0.12}>
+                <p className="text-base sm:text-lg text-[#27312D] leading-[1.7] max-w-2xl">
+                  Pelajari bagaimana kegiatan pengolahan, penimbangan, pencampuran, hingga penanganan
+                  kemasan dijalankan secara tertib agar calon mitra maklon dan pembeli B2B
+                  memperoleh gambaran operasional yang jelas. Urutan final maupun rincian teknis
+                  tetap mengacu pada SOP operasional resmi yang berlaku di BMMF.
+                </p>
+              </HeroEntrance>
+            </div>
+
+            <div className="lg:col-span-6">
+              <HeroEntrance delay={0.14}>
+                <figure className="w-full">
+                  <div className="relative">
+                    <div
+                      aria-hidden="true"
+                      className="bmmf-glow-breathe hidden sm:block absolute -top-3 -right-3 w-20 h-20 border-t-2 border-r-2 border-[#D3B785] rounded-tr-2xl pointer-events-none"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="bmmf-glow-breathe hidden sm:block absolute -bottom-3 -left-3 w-20 h-20 border-b-2 border-l-2 border-[#183D32]/35 rounded-bl-2xl pointer-events-none"
+                    />
+                    <div className="relative overflow-hidden bg-white border border-[#E3E8E3] rounded-xl aspect-[4/3]">
+                      <img
+                        src={companyConfig.media.productionHero.src}
+                        alt={companyConfig.media.productionHero.alt}
+                        loading="eager"
+                        decoding="async"
+                        className="block w-full h-full object-contain"
+                      />
+                    </div>
+                  </div>
+                  <figcaption className="mt-2.5 text-xs text-[#737D77] leading-relaxed text-center sm:text-left">
+                    {companyConfig.media.productionHero.caption}
+                  </figcaption>
+                </figure>
+              </HeroEntrance>
+            </div>
           </div>
         </div>
       </section>
@@ -74,12 +112,12 @@ export function ProductionProcessPage() {
       </div>
 
       {/* Storytelling + Desktop Sticky Step Navigation */}
-      <section className="bg-white py-14 sm:py-20">
+      <section className="bg-white py-8 sm:py-12">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-10 items-start">
             {/* Desktop Step Navigation */}
-            <aside className="hidden lg:block lg:col-span-4 lg:sticky lg:top-28 space-y-6">
-              <div className="border border-[#E3E8E3] rounded-2xl p-6 bg-[#F5F3ED]/60 space-y-3">
+            <aside className="hidden lg:block lg:col-span-4 lg:sticky lg:top-24 space-y-4">
+              <div className="border border-[#E3E8E3] rounded-2xl p-5 bg-[#F5F3ED]/60 space-y-3">
                 <p className="text-xs font-medium tracking-[0.12em] uppercase text-[#737D77]">
                   NAVIGASI TAHAPAN
                 </p>
@@ -124,13 +162,13 @@ export function ProductionProcessPage() {
             </aside>
 
             {/* Stage Storytelling Cards */}
-            <div className="lg:col-span-8 space-y-14 sm:space-y-16">
+            <div className="lg:col-span-8 space-y-8 sm:space-y-10">
               {productionStages.map((stage, idx) => (
                 <Reveal key={stage.stepNumber}>
                   <article
                     id={`tahap-${stage.stepNumber}`}
                     onMouseEnter={() => setActiveIndex(idx)}
-                    className="scroll-mt-32 pb-12 border-b border-[#E3E8E3] last:border-b-0 last:pb-0 space-y-6"
+                    className="scroll-mt-24 pb-8 border-b border-[#E3E8E3] last:border-b-0 last:pb-0 space-y-4"
                   >
                     <div className="flex flex-wrap items-center gap-3 text-xs text-[#737D77]">
                       <span className="font-mono font-semibold text-[#183D32] tabular-nums">
@@ -181,7 +219,7 @@ export function ProductionProcessPage() {
       </section>
 
       {/* Footer CTA Strip */}
-      <section className="bg-[#183D32] text-white py-14 sm:py-16">
+      <section className="bg-[#183D32] text-white py-9 sm:py-11">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <h2 className="font-display font-bold text-2xl sm:text-3xl">
@@ -194,10 +232,10 @@ export function ProductionProcessPage() {
           </div>
           <Link
             to="/kualitas"
-            className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-[#102B24] bg-[#D3B785] hover:bg-[#e1c99e] rounded-[10px] transition-colors whitespace-nowrap shrink-0"
+            className="bmmf-sheen-gold group inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-[#102B24] bg-[#D3B785] hover:bg-[#e1c99e] rounded-[10px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap shrink-0"
           >
             <span>Lihat Standar Kualitas</span>
-            <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
           </Link>
         </div>
       </section>

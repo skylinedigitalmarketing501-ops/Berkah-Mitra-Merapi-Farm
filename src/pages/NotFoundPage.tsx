@@ -10,7 +10,7 @@ export function NotFoundPage() {
         description="Halaman yang Anda tuju tidak tersedia pada website resmi CV. Berkah Mitra Merapi Farm."
         path="/404"
       />
-      <section className="bg-white py-24 sm:py-32">
+      <section className="bg-white py-14 sm:py-20">
         <div className="mx-auto max-w-xl px-4 text-center space-y-5">
           <p className="font-mono text-xs font-medium text-[#737D77]">404</p>
           <h1 className="font-display font-bold text-3xl sm:text-4xl text-[#183D32]">
