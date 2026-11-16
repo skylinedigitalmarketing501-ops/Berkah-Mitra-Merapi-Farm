@@ -26,11 +26,11 @@ export function LegalPage({ mode }: LegalPageProps) {
           <Breadcrumb items={[{ label: title }]} />
 
           <header className="space-y-2 pb-4 border-b border-[#E3E8E3]">
-            <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
+            <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#57615B]">
               DOKUMEN HUKUM & TATA KELOLA
             </p>
             <h1 className="font-display font-bold text-3xl sm:text-4xl text-[#183D32]">{title}</h1>
-            <p className="text-xs text-[#737D77]">
+            <p className="text-xs text-[#57615B]">
               Berlaku untuk layanan informasi bisnis daring {companyConfig.officialName}.
             </p>
           </header>

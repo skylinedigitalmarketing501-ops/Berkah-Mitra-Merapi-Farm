@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Mail, MapPin, MessageSquare, Phone } from 'lucide-react';
 import { companyConfig, getWhatsAppMaklonUrl, getWhatsAppProductUrl } from '../config/company';
 import { primaryNavigation } from '../data/navigation';
+import { trackConversionEvent } from '../utils/analytics';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -16,9 +17,12 @@ export function Footer() {
               <span className="w-11 h-11 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0">
                 <img
                   src={companyConfig.logo.src}
+                  srcSet={companyConfig.logo.srcSet}
                   alt={companyConfig.logo.alt}
                   width={36}
                   height={36}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-contain"
                 />
               </span>
@@ -29,11 +33,11 @@ export function Footer() {
                 <p className="text-xs text-[#D3B785]">{companyConfig.officialName}</p>
               </div>
             </Link>
-            <p className="text-sm text-white/75 leading-relaxed max-w-sm">
+            <p className="text-sm text-white/85 leading-relaxed max-w-sm">
               Perusahaan industri pengolahan susu bubuk dan mitra maklon susu kambing Etawa bubuk
               yang berfokus pada ketertiban proses, mutu produk, dan kerja sama B2B berkelanjutan.
             </p>
-            <p className="text-xs text-white/55">
+            <p className="text-xs text-white/75">
               Domain Referensi: {companyConfig.domain}
             </p>
           </div>
@@ -119,6 +123,14 @@ export function Footer() {
                   href={getWhatsAppMaklonUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackConversionEvent({
+                      event: 'whatsapp_open',
+                      source: 'footer_maklon',
+                      inquiryType: 'Maklon',
+                      channel: 'whatsapp',
+                    })
+                  }
                   className="inline-flex items-center gap-2 text-xs text-[#D3B785] hover:underline"
                 >
                   <MessageSquare className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
@@ -129,7 +141,15 @@ export function Footer() {
                   href={getWhatsAppProductUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs text-white/80 hover:text-[#D3B785] hover:underline"
+                  onClick={() =>
+                    trackConversionEvent({
+                      event: 'whatsapp_open',
+                      source: 'footer_product',
+                      inquiryType: 'Pemesanan Susu Bubuk',
+                      channel: 'whatsapp',
+                    })
+                  }
+                  className="inline-flex items-center gap-2 text-xs text-white/85 hover:text-[#D3B785] hover:underline"
                 >
                   <MessageSquare className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                   <span>WhatsApp Pemesanan Susu Bubuk</span>
@@ -137,14 +157,14 @@ export function Footer() {
               </li>
             </ul>
             {companyConfig.socialLinks.length === 0 && (
-              <p className="text-xs text-white/50 leading-relaxed pt-1">
+              <p className="text-xs text-white/75 leading-relaxed pt-1">
                 Kanal media sosial resmi perusahaan akan ditautkan setelah verifikasi akun.
               </p>
             )}
           </div>
         </div>
 
-        <div className="mt-8 pt-5 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-white/60">
+        <div className="mt-8 pt-5 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-white/80">
           <p>
             © {currentYear} {companyConfig.officialName}. Seluruh hak cipta dilindungi.
           </p>

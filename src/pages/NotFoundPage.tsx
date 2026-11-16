@@ -12,11 +12,11 @@ export function NotFoundPage() {
       />
       <section className="bg-white py-14 sm:py-20">
         <div className="mx-auto max-w-xl px-4 text-center space-y-5">
-          <p className="font-mono text-xs font-medium text-[#737D77]">404</p>
+          <p className="font-mono text-xs font-medium text-[#57615B]">404</p>
           <h1 className="font-display font-bold text-3xl sm:text-4xl text-[#183D32]">
             Halaman Tidak Ditemukan
           </h1>
-          <p className="text-sm sm:text-base text-[#737D77] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#57615B] leading-relaxed">
             Alamat halaman yang Anda buka tidak tersedia atau telah dipindahkan. Silakan kembali ke
             beranda untuk menelusuri informasi resmi BMMF.
           </p>

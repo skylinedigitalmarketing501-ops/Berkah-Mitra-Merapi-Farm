@@ -70,14 +70,19 @@ export function ProductionProcessPage() {
                     <div className="relative overflow-hidden bg-white border border-[#E3E8E3] rounded-xl aspect-[4/3]">
                       <img
                         src={companyConfig.media.productionHero.src}
+                        srcSet={companyConfig.media.productionHero.srcSet}
+                        sizes="(max-width: 1024px) 100vw, 48vw"
+                        width={960}
+                        height={720}
                         alt={companyConfig.media.productionHero.alt}
                         loading="eager"
+                        fetchPriority="high"
                         decoding="async"
                         className="block w-full h-full object-contain"
                       />
                     </div>
                   </div>
-                  <figcaption className="mt-2.5 text-xs text-[#737D77] leading-relaxed text-center sm:text-left">
+                  <figcaption className="mt-2.5 text-xs text-[#57615B] leading-relaxed text-center sm:text-left">
                     {companyConfig.media.productionHero.caption}
                   </figcaption>
                 </figure>
@@ -118,7 +123,7 @@ export function ProductionProcessPage() {
             {/* Desktop Step Navigation */}
             <aside className="hidden lg:block lg:col-span-4 lg:sticky lg:top-24 space-y-4">
               <div className="border border-[#E3E8E3] rounded-2xl p-5 bg-[#F5F3ED]/60 space-y-3">
-                <p className="text-xs font-medium tracking-[0.12em] uppercase text-[#737D77]">
+                <p className="text-xs font-medium tracking-[0.12em] uppercase text-[#57615B]">
                   NAVIGASI TAHAPAN
                 </p>
                 <nav aria-label="Navigasi tahapan produksi" className="space-y-1.5">
@@ -137,7 +142,7 @@ export function ProductionProcessPage() {
                       >
                         <span
                           className={`font-mono text-xs tabular-nums pt-0.5 ${
-                            isActive ? 'text-[#D3B785]' : 'text-[#737D77]'
+                            isActive ? 'text-[#D3B785]' : 'text-[#57615B]'
                           }`}
                         >
                           {stage.stepNumber}
@@ -151,7 +156,7 @@ export function ProductionProcessPage() {
 
               <div className="border border-[#E3E8E3] rounded-2xl p-6 space-y-2">
                 <p className="text-xs font-semibold text-[#183D32]">Catatan Transparansi SOP</p>
-                <p className="text-xs text-[#737D77] leading-relaxed">
+                <p className="text-xs text-[#57615B] leading-relaxed">
                   Halaman ini tidak menampilkan spesifikasi mesin atau teknologi tertentu sebelum
                   daftar fasilitas diverifikasi secara resmi oleh perusahaan.
                 </p>
@@ -170,7 +175,7 @@ export function ProductionProcessPage() {
                     onMouseEnter={() => setActiveIndex(idx)}
                     className="scroll-mt-24 pb-8 border-b border-[#E3E8E3] last:border-b-0 last:pb-0 space-y-4"
                   >
-                    <div className="flex flex-wrap items-center gap-3 text-xs text-[#737D77]">
+                    <div className="flex flex-wrap items-center gap-3 text-xs text-[#57615B]">
                       <span className="font-mono font-semibold text-[#183D32] tabular-nums">
                         TAHAP {stage.stepNumber}
                       </span>
@@ -183,11 +188,15 @@ export function ProductionProcessPage() {
                         {stage.title}
                       </h2>
                       <p className="text-base font-medium text-[#27312D]">{stage.summary}</p>
-                      <p className="text-[15px] text-[#737D77] leading-[1.7]">{stage.description}</p>
+                      <p className="text-[15px] text-[#57615B] leading-[1.7]">{stage.description}</p>
                     </div>
 
                     <SafeImage
                       src={stage.image.src}
+                      srcSet={stage.image.srcSet}
+                      sizes="(max-width: 1024px) 100vw, 62vw"
+                      width={960}
+                      height={540}
                       alt={`${stage.title} — ${stage.image.alt}`}
                       caption={stage.image.caption}
                       isPlaceholder={stage.image.isPlaceholder}

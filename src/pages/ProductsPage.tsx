@@ -7,6 +7,7 @@ import { SeoHead } from '../components/SeoHead';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { SafeImage } from '../components/SafeImage';
 import { Reveal } from '../components/MotionPrimitives';
+import { trackConversionEvent } from '../utils/analytics';
 
 export function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('Semua Kategori');
@@ -55,6 +56,14 @@ export function ProductsPage() {
               <div className="flex flex-wrap items-center gap-3.5 pt-2">
                 <Link
                   to="/kontak?kebutuhan=Pemesanan%20Susu%20Bubuk"
+                  onClick={() =>
+                    trackConversionEvent({
+                      event: 'cta_product_quote_click',
+                      source: 'products_header',
+                      inquiryType: 'Pemesanan Susu Bubuk',
+                      channel: 'route',
+                    })
+                  }
                   className="bmmf-sheen group inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[11px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap"
                 >
                   <span>Minta Penawaran Bisnis</span>
@@ -64,6 +73,14 @@ export function ProductsPage() {
                   href={getWhatsAppProductUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackConversionEvent({
+                      event: 'whatsapp_open',
+                      source: 'products_header',
+                      inquiryType: 'Pemesanan Susu Bubuk',
+                      channel: 'whatsapp',
+                    })
+                  }
                   className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-[#183D32] bg-white border border-[#E3E8E3] hover:bg-[#F5F3ED] rounded-[11px] transition-colors whitespace-nowrap"
                 >
                   <MessageSquare className="w-4 h-4" aria-hidden="true" />
@@ -75,6 +92,10 @@ export function ProductsPage() {
             <div className="lg:col-span-5">
               <SafeImage
                 src={companyConfig.media.productsHeader.src}
+                srcSet={companyConfig.media.productsHeader.srcSet}
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                width={960}
+                height={720}
                 alt={companyConfig.media.productsHeader.alt}
                 caption={companyConfig.media.productsHeader.caption}
                 isPlaceholder={companyConfig.media.productsHeader.isPlaceholder}
@@ -112,7 +133,7 @@ export function ProductsPage() {
 
             <div className="relative w-full md:w-72 shrink-0">
               <Search
-                className="w-4 h-4 text-[#737D77] absolute left-3.5 top-1/2 -translate-y-1/2"
+                className="w-4 h-4 text-[#57615B] absolute left-3.5 top-1/2 -translate-y-1/2"
                 aria-hidden="true"
               />
               <label htmlFor="product-search" className="sr-only">
@@ -140,6 +161,10 @@ export function ProductsPage() {
                     <div className="lg:col-span-5">
                       <SafeImage
                         src={product.imageSrc}
+                        srcSet={product.imageSrcSet}
+                        sizes="(max-width: 1024px) 100vw, 40vw"
+                        width={960}
+                        height={720}
                         alt={product.imageAlt}
                         aspectClassName="aspect-[4/3]"
                         isPlaceholder={product.isPlaceholderImage}
@@ -149,7 +174,7 @@ export function ProductsPage() {
 
                     <div className="lg:col-span-7 space-y-5">
                       <div className="space-y-2">
-                        <p className="text-xs font-medium text-[#737D77]">
+                        <p className="text-xs font-medium text-[#57615B]">
                           Kategori: {product.category}
                         </p>
                         <h2 className="font-display font-bold text-2xl sm:text-3xl text-[#183D32]">
@@ -162,7 +187,7 @@ export function ProductsPage() {
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-[#E3E8E3]">
                         <div className="space-y-1">
-                          <p className="text-xs font-semibold uppercase tracking-wider text-[#737D77]">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-[#57615B]">
                             Informasi Varian
                           </p>
                           <p className="text-sm text-[#27312D] leading-relaxed">
@@ -170,7 +195,7 @@ export function ProductsPage() {
                           </p>
                         </div>
                         <div className="space-y-1">
-                          <p className="text-xs font-semibold uppercase tracking-wider text-[#737D77]">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-[#57615B]">
                             Informasi Kemasan
                           </p>
                           <p className="text-sm text-[#27312D] leading-relaxed">
@@ -204,6 +229,14 @@ export function ProductsPage() {
                           to={`/kontak?kebutuhan=Pemesanan%20Susu%20Bubuk&produk=${encodeURIComponent(
                             product.name
                           )}`}
+                          onClick={() =>
+                            trackConversionEvent({
+                              event: 'cta_product_quote_click',
+                              source: 'products_catalog_card',
+                              inquiryType: 'Pemesanan Susu Bubuk',
+                              channel: 'route',
+                            })
+                          }
                           className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[10px] transition-colors whitespace-nowrap"
                         >
                           <span>Minta Penawaran</span>
@@ -213,6 +246,14 @@ export function ProductsPage() {
                           href={getWhatsAppProductUrl(product.name)}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={() =>
+                            trackConversionEvent({
+                              event: 'whatsapp_open',
+                              source: 'products_catalog_card',
+                              inquiryType: 'Pemesanan Susu Bubuk',
+                              channel: 'whatsapp',
+                            })
+                          }
                           className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-[#183D32] bg-white hover:bg-[#F5F3ED] border border-[#E3E8E3] rounded-[10px] transition-colors whitespace-nowrap"
                         >
                           <MessageSquare className="w-4 h-4" aria-hidden="true" />
@@ -229,7 +270,7 @@ export function ProductsPage() {
               <p className="font-display font-semibold text-lg text-[#183D32]">
                 Produk Tidak Ditemukan
               </p>
-              <p className="text-sm text-[#737D77]">
+              <p className="text-sm text-[#57615B]">
                 Tidak ada kategori atau produk yang sesuai dengan pencarian Anda.
               </p>
             </div>

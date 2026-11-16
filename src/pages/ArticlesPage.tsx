@@ -61,7 +61,7 @@ export function ArticlesPage() {
           <h1 className="font-display font-bold text-[#183D32] tracking-[-0.025em] leading-[1.1] text-[34px] sm:text-[44px] lg:text-[50px]">
             Artikel & Informasi Perusahaan
           </h1>
-          <p className="text-sm sm:text-base text-[#737D77] max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base text-[#57615B] max-w-2xl leading-relaxed">
             Catatan redaksi: Artikel di bawah ini ditandai secara eksplisit sebagai contoh struktur
             konten editorial hingga publikasi resmi CV. Berkah Mitra Merapi Farm diterbitkan.
           </p>
@@ -76,13 +76,17 @@ export function ArticlesPage() {
               <div className="lg:col-span-6">
                 <SafeImage
                   src={featuredArticle.coverImage}
+                  srcSet={featuredArticle.coverImageSrcSet}
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  width={960}
+                  height={600}
                   alt={featuredArticle.coverAlt}
                   aspectClassName="aspect-[16/10]"
                   caption=""
                 />
               </div>
               <div className="lg:col-span-6 space-y-4">
-                <div className="flex flex-wrap items-center gap-2 text-xs text-[#737D77]">
+                <div className="flex flex-wrap items-center gap-2 text-xs text-[#57615B]">
                   <span className="font-semibold text-[#183D32]">Artikel Utama</span>
                   <span aria-hidden="true">·</span>
                   <span>{featuredArticle.category}</span>
@@ -100,7 +104,7 @@ export function ArticlesPage() {
                     {featuredArticle.title}
                   </Link>
                 </h2>
-                <p className="text-[15px] text-[#737D77] leading-relaxed">
+                <p className="text-[15px] text-[#57615B] leading-relaxed">
                   {featuredArticle.excerpt}
                 </p>
                 <div className="pt-2">
@@ -147,7 +151,7 @@ export function ArticlesPage() {
 
             <div className="relative w-full lg:w-72 shrink-0">
               <Search
-                className="w-4 h-4 text-[#737D77] absolute left-3.5 top-1/2 -translate-y-1/2"
+                className="w-4 h-4 text-[#57615B] absolute left-3.5 top-1/2 -translate-y-1/2"
                 aria-hidden="true"
               />
               <label htmlFor="article-search" className="sr-only">
@@ -177,6 +181,10 @@ export function ArticlesPage() {
                   <div className="p-6 pb-0">
                     <SafeImage
                       src={article.coverImage}
+                      srcSet={article.coverImageSrcSet}
+                      sizes="(max-width: 768px) 100vw, 45vw"
+                      width={960}
+                      height={540}
                       alt={article.coverAlt}
                       aspectClassName="aspect-[16/9]"
                       caption=""
@@ -184,7 +192,7 @@ export function ArticlesPage() {
                   </div>
                   <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-4">
                     <div className="space-y-2.5">
-                      <div className="flex flex-wrap items-center gap-2 text-xs text-[#737D77]">
+                      <div className="flex flex-wrap items-center gap-2 text-xs text-[#57615B]">
                         <span className="font-medium text-[#183D32]">{article.category}</span>
                         <span aria-hidden="true">·</span>
                         <span>{article.publishedAt}</span>
@@ -202,7 +210,7 @@ export function ArticlesPage() {
                           {article.title}
                         </Link>
                       </h3>
-                      <p className="text-sm text-[#737D77] leading-relaxed">{article.excerpt}</p>
+                      <p className="text-sm text-[#57615B] leading-relaxed">{article.excerpt}</p>
                     </div>
 
                     <div className="pt-3 border-t border-[#E3E8E3]">
@@ -223,7 +231,7 @@ export function ArticlesPage() {
               <p className="font-display font-semibold text-lg text-[#183D32]">
                 Artikel Tidak Ditemukan
               </p>
-              <p className="text-sm text-[#737D77]">
+              <p className="text-sm text-[#57615B]">
                 Tidak ada artikel yang cocok dengan filter atau kata kunci pencarian Anda.
               </p>
             </div>

@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { primaryNavigation } from '../data/navigation';
 import { companyConfig } from '../config/company';
+import { trackConversionEvent } from '../utils/analytics';
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -48,6 +49,7 @@ export function Navbar() {
         >
           <img
             src={companyConfig.logo.src}
+            srcSet={companyConfig.logo.srcSet}
             alt={companyConfig.logo.alt}
             width={48}
             height={48}
@@ -68,7 +70,7 @@ export function Navbar() {
                 key={item.path}
                 to={item.path}
                 className={`relative py-2 text-[13px] 2xl:text-[13.5px] font-medium whitespace-nowrap shrink-0 transition-colors duration-200 ${
-                  isActive ? 'text-[#183D32]' : 'text-[#737D77] hover:text-[#183D32]'
+                  isActive ? 'text-[#183D32]' : 'text-[#57615B] hover:text-[#183D32]'
                 }`}
               >
                 {item.label}
@@ -88,6 +90,14 @@ export function Navbar() {
         <div className="flex items-center gap-3 shrink-0">
           <Link
             to="/kontak?kebutuhan=Maklon"
+            onClick={() =>
+              trackConversionEvent({
+                event: 'cta_maklon_click',
+                source: 'navbar_desktop',
+                inquiryType: 'Maklon',
+                channel: 'route',
+              })
+            }
             className="bmmf-sheen bmmf-sheen-delay-1 group hidden xl:inline-flex items-center gap-1.5 px-4 py-2.5 text-[13.5px] font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[10px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap shrink-0"
           >
             <span>Konsultasi Maklon</span>
@@ -155,6 +165,14 @@ export function Navbar() {
                 <div className="pt-4 mt-3 border-t border-[#E3E8E3]">
                   <Link
                     to="/kontak?kebutuhan=Maklon"
+                    onClick={() =>
+                      trackConversionEvent({
+                        event: 'cta_maklon_click',
+                        source: 'navbar_mobile',
+                        inquiryType: 'Maklon',
+                        channel: 'route',
+                      })
+                    }
                     className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[10px] transition-colors"
                   >
                     <span>Konsultasi Maklon</span>

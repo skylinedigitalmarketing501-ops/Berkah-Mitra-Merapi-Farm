@@ -11,6 +11,7 @@ import { SeoHead } from '../components/SeoHead';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { SafeImage } from '../components/SafeImage';
 import { Reveal } from '../components/MotionPrimitives';
+import { trackConversionEvent } from '../utils/analytics';
 
 export function LayananMaklonPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
@@ -43,6 +44,14 @@ export function LayananMaklonPage() {
               <div className="flex flex-wrap items-center gap-3.5 pt-2">
                 <Link
                   to="/kontak?kebutuhan=Maklon"
+                  onClick={() =>
+                    trackConversionEvent({
+                      event: 'cta_maklon_click',
+                      source: 'maklon_page_header',
+                      inquiryType: 'Maklon',
+                      channel: 'route',
+                    })
+                  }
                   className="bmmf-sheen group inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[11px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap"
                 >
                   <span>Konsultasi dengan Tim BMMF</span>
@@ -52,6 +61,14 @@ export function LayananMaklonPage() {
                   href={getWhatsAppMaklonUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackConversionEvent({
+                      event: 'whatsapp_open',
+                      source: 'maklon_page_header',
+                      inquiryType: 'Maklon',
+                      channel: 'whatsapp',
+                    })
+                  }
                   className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-[#183D32] bg-white border border-[#E3E8E3] hover:bg-[#F5F3ED] rounded-[11px] transition-colors whitespace-nowrap"
                 >
                   <MessageSquare className="w-4 h-4" aria-hidden="true" />
@@ -63,6 +80,10 @@ export function LayananMaklonPage() {
             <div className="lg:col-span-5">
               <SafeImage
                 src={companyConfig.media.maklonHeader.src}
+                srcSet={companyConfig.media.maklonHeader.srcSet}
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                width={960}
+                height={720}
                 alt={companyConfig.media.maklonHeader.alt}
                 caption={companyConfig.media.maklonHeader.caption}
                 isPlaceholder={companyConfig.media.maklonHeader.isPlaceholder}
@@ -79,7 +100,7 @@ export function LayananMaklonPage() {
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
             <Reveal className="lg:col-span-5 space-y-3">
-              <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
+              <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#57615B]">
                 MENGENAL LAYANAN MAKLON
               </p>
               <h2 className="font-display font-bold text-[#183D32] text-2xl sm:text-4xl leading-tight">
@@ -96,7 +117,7 @@ export function LayananMaklonPage() {
                 usaha mempercayakan proses pengolahan produk kepada mitra manufaktur sesuai
                 spesifikasi, kemasan, dan ketentuan yang disepakati bersama.
               </p>
-              <p className="text-[#737D77]">
+              <p className="text-[#57615B]">
                 Melalui kerja sama maklon susu bubuk bersama BMMF, mitra bisnis dapat memfokuskan
                 sumber daya pada pengembangan distribusi dan pemasaran merek tanpa harus membangun
                 fasilitas pengolahan sendiri dari awal. Setiap ruang lingkup pekerjaan dibahas
@@ -111,7 +132,7 @@ export function LayananMaklonPage() {
       <section className="bg-[#F5F3ED] py-9 sm:py-12 border-b border-[#E3E8E3]">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <Reveal className="max-w-2xl space-y-2.5 mb-6">
-            <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
+            <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#57615B]">
               SEGMEN KEMITRAAN
             </p>
             <h2 className="font-display font-bold text-[#183D32] text-2xl sm:text-4xl">
@@ -130,7 +151,7 @@ export function LayananMaklonPage() {
                   {partner.number}
                 </span>
                 <h3 className="font-display font-bold text-lg text-[#183D32]">{partner.title}</h3>
-                <p className="text-sm text-[#737D77] leading-relaxed">{partner.description}</p>
+                <p className="text-sm text-[#57615B] leading-relaxed">{partner.description}</p>
               </Reveal>
             ))}
           </div>
@@ -142,14 +163,14 @@ export function LayananMaklonPage() {
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
             <div className="space-y-2 max-w-2xl">
-              <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
+              <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#57615B]">
                 ALUR KERJA SAMA MAKLON
               </p>
               <h2 className="font-display font-bold text-[#183D32] text-2xl sm:text-4xl">
                 Tahapan Komunikasi & Produksi
               </h2>
             </div>
-            <p className="text-xs text-[#737D77] max-w-md leading-relaxed">
+            <p className="text-xs text-[#57615B] max-w-md leading-relaxed">
               Alur berikut merupakan rancangan komunikasi kerja sama dan disesuaikan dengan SOP
               resmi BMMF yang berlaku pada saat perjanjian disepakati.
             </p>
@@ -168,7 +189,7 @@ export function LayananMaklonPage() {
                     <h3 className="font-display font-bold text-lg text-[#183D32]">{item.title}</h3>
                   </div>
                   <div className="md:col-span-6">
-                    <p className="text-[15px] text-[#737D77] leading-relaxed">{item.description}</p>
+                    <p className="text-[15px] text-[#57615B] leading-relaxed">{item.description}</p>
                   </div>
                 </div>
               </Reveal>
@@ -182,13 +203,13 @@ export function LayananMaklonPage() {
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
             <Reveal className="lg:col-span-4 space-y-3">
-              <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
+              <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#57615B]">
                 PERTANYAAN UMUM
               </p>
               <h2 className="font-display font-bold text-[#183D32] text-2xl sm:text-4xl">
                 FAQ Layanan Maklon
               </h2>
-              <p className="text-sm text-[#737D77] leading-relaxed">
+              <p className="text-sm text-[#57615B] leading-relaxed">
                 Pertanyaan teknis mengenai MOQ, estimasi waktu, dan penawaran biaya dijawab secara
                 spesifik saat konsultasi sesuai profil kebutuhan usaha Anda.
               </p>

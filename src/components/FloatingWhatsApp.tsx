@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight, X } from 'lucide-react';
 import { companyConfig, getWhatsAppMaklonUrl, getWhatsAppProductUrl } from '../config/company';
+import { trackConversionEvent } from '../utils/analytics';
 
 export function FloatingWhatsApp() {
   const [open, setOpen] = useState(false);
@@ -35,6 +36,7 @@ export function FloatingWhatsApp() {
               <div className="flex items-center gap-2.5">
                 <img
                   src={companyConfig.logo.src}
+                  srcSet={companyConfig.logo.srcSet}
                   alt={companyConfig.logo.alt}
                   width={28}
                   height={28}
@@ -44,7 +46,7 @@ export function FloatingWhatsApp() {
                   <p className="font-display font-bold text-sm text-[#183D32]">
                     {companyConfig.webName}
                   </p>
-                  <p className="text-xs text-[#737D77]">
+                  <p className="text-xs text-[#57615B]">
                     Pilih topik pesan WhatsApp otomatis.
                   </p>
                 </div>
@@ -53,7 +55,7 @@ export function FloatingWhatsApp() {
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Tutup panel WhatsApp"
-                className="p-1 text-[#737D77] hover:text-[#183D32] rounded-lg"
+                className="p-1 text-[#57615B] hover:text-[#183D32] rounded-lg"
               >
                 <X className="w-4 h-4" aria-hidden="true" />
               </button>
@@ -64,7 +66,15 @@ export function FloatingWhatsApp() {
                 href={getWhatsAppMaklonUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  trackConversionEvent({
+                    event: 'whatsapp_open',
+                    source: 'floating_wa_maklon',
+                    inquiryType: 'Maklon',
+                    channel: 'whatsapp',
+                  });
+                  setOpen(false);
+                }}
                 className="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl bg-[#F5F3ED] hover:bg-[#ebe7dc] text-xs font-semibold text-[#183D32] transition-colors"
               >
                 <span>Konsultasi Layanan Maklon</span>
@@ -75,7 +85,15 @@ export function FloatingWhatsApp() {
                 href={getWhatsAppProductUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  trackConversionEvent({
+                    event: 'whatsapp_open',
+                    source: 'floating_wa_product',
+                    inquiryType: 'Pemesanan Susu Bubuk',
+                    channel: 'whatsapp',
+                  });
+                  setOpen(false);
+                }}
                 className="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl bg-[#F5F3ED] hover:bg-[#ebe7dc] text-xs font-semibold text-[#183D32] transition-colors"
               >
                 <span>Pemesanan Produk Susu Bubuk</span>
@@ -87,7 +105,7 @@ export function FloatingWhatsApp() {
               <Link
                 to="/kontak"
                 onClick={() => setOpen(false)}
-                className="block text-center text-xs font-medium text-[#737D77] hover:text-[#183D32] hover:underline"
+                className="block text-center text-xs font-medium text-[#57615B] hover:text-[#183D32] hover:underline"
               >
                 Atau isi Formulir Permintaan Penawaran
               </Link>

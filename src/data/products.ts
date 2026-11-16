@@ -9,6 +9,7 @@ export interface B2BProductItem {
   packagingInfo: string | null;
   approvedSpecifications: string[];
   imageSrc: string;
+  imageSrcSet?: string;
   imageAlt: string;
   isPlaceholderImage: boolean;
 }
@@ -49,6 +50,7 @@ export const b2bProducts: B2BProductItem[] = [
       'Detail komposisi, nomor izin edar, dan MOQ: Dibahas sesuai spesifikasi pesanan resmi',
     ],
     imageSrc: companyConfig.media.productSample.src,
+    imageSrcSet: companyConfig.media.productSample.srcSet,
     imageAlt: companyConfig.media.productSample.alt,
     isPlaceholderImage: companyConfig.media.productSample.isPlaceholder,
   },

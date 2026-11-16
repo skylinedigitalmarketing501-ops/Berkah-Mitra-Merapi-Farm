@@ -9,7 +9,7 @@ interface BreadcrumbItem {
 export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
   return (
     <nav aria-label="Breadcrumb" className="mb-3.5">
-      <ol className="flex flex-wrap items-center gap-1.5 text-xs text-[#737D77]">
+      <ol className="flex flex-wrap items-center gap-1.5 text-xs text-[#57615B]">
         <li>
           <Link to="/" className="hover:text-[#183D32] transition-colors">
             Beranda
@@ -17,7 +17,7 @@ export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
         </li>
         {items.map((item, idx) => (
           <li key={item.label} className="flex items-center gap-1.5">
-            <ChevronRight className="w-3.5 h-3.5 text-[#737D77]/70" aria-hidden="true" />
+            <ChevronRight className="w-3.5 h-3.5 text-[#57615B]" aria-hidden="true" />
             {item.path && idx < items.length - 1 ? (
               <Link to={item.path} className="hover:text-[#183D32] transition-colors">
                 {item.label}

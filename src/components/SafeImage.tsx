@@ -3,6 +3,10 @@ import { Factory } from 'lucide-react';
 
 interface SafeImageProps {
   src: string;
+  srcSet?: string;
+  sizes?: string;
+  width?: number;
+  height?: number;
   alt: string;
   className?: string;
   aspectClassName?: string;
@@ -13,6 +17,10 @@ interface SafeImageProps {
 
 export function SafeImage({
   src,
+  srcSet,
+  sizes = '(max-width: 768px) 100vw, 50vw',
+  width,
+  height,
   alt,
   className = '',
   aspectClassName = 'aspect-[4/3]',
@@ -20,14 +28,16 @@ export function SafeImage({
   isPlaceholder = false,
   priority = false,
 }: SafeImageProps) {
-  const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
+  const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>(
+    priority ? 'loaded' : 'loading'
+  );
 
   return (
     <figure className="w-full">
       <div
         className={`relative overflow-hidden bg-[#F5F3ED] border border-[#E3E8E3] rounded-xl ${aspectClassName}`}
       >
-        {status === 'loading' && (
+        {!priority && status === 'loading' && (
           <div
             aria-hidden="true"
             className="absolute inset-0 bg-[#EFECE3] animate-pulse"
@@ -35,18 +45,23 @@ export function SafeImage({
         )}
 
         {status === 'error' ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-[#F5F3ED] text-[#737D77]">
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-[#F5F3ED] text-[#57615B]">
             <Factory className="w-8 h-8 text-[#183D32]/50 mb-3" strokeWidth={1.5} />
             <p className="text-sm font-medium text-[#27312D] max-w-xs">{alt}</p>
-            <p className="text-xs text-[#737D77] mt-1">
+            <p className="text-xs text-[#57615B] mt-1">
               Dokumentasi visual sedang disiapkan
             </p>
           </div>
         ) : (
           <img
             src={src}
+            srcSet={srcSet}
+            sizes={srcSet ? sizes : undefined}
+            width={width}
+            height={height}
             alt={alt}
             loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : undefined}
             decoding="async"
             referrerPolicy="no-referrer"
             onLoad={() => setStatus('loaded')}
@@ -59,7 +74,7 @@ export function SafeImage({
       </div>
 
       {(caption || isPlaceholder) && (
-        <figcaption className="mt-2.5 text-xs text-[#737D77] leading-relaxed">
+        <figcaption className="mt-2.5 text-xs text-[#57615B] leading-relaxed">
           {caption || 'Visual ilustrasi operasional — menunggu pembaruan foto resmi perusahaan.'}
         </figcaption>
       )}

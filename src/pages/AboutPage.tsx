@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { useReducedMotion } from 'motion/react';
 import { ArrowRight, ExternalLink, MapPin } from 'lucide-react';
 import { companyConfig } from '../config/company';
 import { SeoHead } from '../components/SeoHead';
 import { Breadcrumb } from '../components/Breadcrumb';
+import { HeroVideoPlayer } from '../components/HeroVideoPlayer';
 import { HeroEntrance, Reveal } from '../components/MotionPrimitives';
 
 const corporateValues = [
@@ -55,8 +55,6 @@ const timelineEntries = [
 ];
 
 export function AboutPage() {
-  const prefersReduced = useReducedMotion();
-
   return (
     <>
       <SeoHead
@@ -76,6 +74,7 @@ export function AboutPage() {
                 <div className="flex items-center gap-3">
                   <img
                     src={companyConfig.logo.src}
+                    srcSet={companyConfig.logo.srcSet}
                     alt={companyConfig.logo.alt}
                     width={44}
                     height={44}
@@ -102,36 +101,16 @@ export function AboutPage() {
             </div>
             <div className="lg:col-span-6">
               <HeroEntrance delay={0.14}>
-                <figure className="w-full">
-                  <div className="relative">
-                    <div
-                      aria-hidden="true"
-                      className="bmmf-glow-breathe hidden sm:block absolute -top-3 -right-3 w-20 h-20 border-t-2 border-r-2 border-[#D3B785] rounded-tr-2xl pointer-events-none"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="bmmf-glow-breathe hidden sm:block absolute -bottom-3 -left-3 w-20 h-20 border-b-2 border-l-2 border-[#183D32]/35 rounded-bl-2xl pointer-events-none"
-                    />
-                    <div className="relative overflow-hidden bg-white border border-[#E3E8E3] rounded-xl aspect-video">
-                      <video
-                        src={companyConfig.media.aboutHeroVideo.src}
-                        aria-label={companyConfig.media.aboutHeroVideo.alt}
-                        autoPlay={!prefersReduced}
-                        controls={Boolean(prefersReduced)}
-                        loop
-                        muted
-                        playsInline
-                        preload="metadata"
-                        className="block w-full h-full object-contain"
-                      >
-                        Browser Anda tidak mendukung pemutaran video HTML5.
-                      </video>
-                    </div>
-                  </div>
-                  <figcaption className="mt-2.5 text-xs text-[#737D77] leading-relaxed text-center sm:text-left">
-                    {companyConfig.media.aboutHeroVideo.caption}
-                  </figcaption>
-                </figure>
+                <HeroVideoPlayer
+                  src={companyConfig.media.aboutHeroVideo.src}
+                  posterSrc={companyConfig.media.aboutHeroVideo.poster}
+                  posterSrcSet={companyConfig.media.aboutHeroVideo.posterSrcSet}
+                  posterSizes="(max-width: 1024px) 100vw, 48vw"
+                  trackSrc={companyConfig.media.aboutHeroVideo.trackSrc}
+                  alt={companyConfig.media.aboutHeroVideo.alt}
+                  caption={companyConfig.media.aboutHeroVideo.caption}
+                  surfaceClassName="bg-white"
+                />
               </HeroEntrance>
             </div>
           </div>
@@ -142,13 +121,13 @@ export function AboutPage() {
       <section className="bg-white py-9 sm:py-12 border-b border-[#E3E8E3]">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <Reveal className="max-w-2xl space-y-2.5 mb-6">
-            <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
+            <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#57615B]">
               PERJALANAN PERUSAHAAN
             </p>
             <h2 className="font-display font-bold text-[#183D32] text-2xl sm:text-4xl">
               Landasan Perkembangan Operasional
             </h2>
-            <p className="text-sm text-[#737D77] leading-relaxed">
+            <p className="text-sm text-[#57615B] leading-relaxed">
               Linimasa berikut merangkum tonggak umum perusahaan tanpa menambahkan klaim tanggal
               atau pencapaian yang belum terverifikasi.
             </p>
@@ -183,14 +162,14 @@ export function AboutPage() {
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <Reveal className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div className="space-y-2">
-              <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
+              <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#57615B]">
                 ARAH PERUSAHAAN
               </p>
               <h2 className="font-display font-bold text-[#183D32] text-2xl sm:text-4xl">
                 Rancangan Visi & Misi Perusahaan
               </h2>
             </div>
-            <p className="text-xs text-[#737D77] max-w-md">
+            <p className="text-xs text-[#57615B] max-w-md">
               Status redaksi: Rancangan visi dan misi ini disiapkan sebagai pedoman korporat dan
               memerlukan persetujuan final manajemen perusahaan.
             </p>
@@ -211,7 +190,7 @@ export function AboutPage() {
               delay={0.08}
               className="lg:col-span-7 bg-white border border-[#E3E8E3] rounded-2xl p-6 sm:p-8 space-y-4"
             >
-              <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
+              <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#57615B]">
                 MISI (RANCANGAN)
               </p>
               <ul className="space-y-4">
@@ -243,7 +222,7 @@ export function AboutPage() {
       <section className="bg-white py-9 sm:py-12 border-b border-[#E3E8E3]">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <Reveal className="max-w-2xl space-y-2.5 mb-6">
-            <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
+            <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#57615B]">
               NILAI KERJA BMMF
             </p>
             <h2 className="font-display font-bold text-[#183D32] text-2xl sm:text-4xl">
@@ -258,9 +237,9 @@ export function AboutPage() {
                 delay={idx * 0.05}
                 className="bmmf-sheen-soft border border-[#E3E8E3] rounded-2xl p-5 sm:p-6 space-y-2.5 hover:border-[#183D32]/40 hover:-translate-y-1 hover:shadow-sm transition-all duration-300"
               >
-                <span className="font-mono text-xs text-[#737D77] tabular-nums">{val.number}</span>
+                <span className="font-mono text-xs text-[#57615B] tabular-nums">{val.number}</span>
                 <h3 className="font-display font-bold text-xl text-[#183D32]">{val.title}</h3>
-                <p className="text-sm text-[#737D77] leading-relaxed">{val.description}</p>
+                <p className="text-sm text-[#57615B] leading-relaxed">{val.description}</p>
               </Reveal>
             ))}
           </div>
@@ -271,13 +250,13 @@ export function AboutPage() {
       <section className="bg-white py-9 sm:py-12">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <Reveal className="max-w-2xl space-y-2.5 mb-6">
-            <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
+            <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#57615B]">
               LOKASI OPERASIONAL
             </p>
             <h2 className="font-display font-bold text-[#183D32] text-2xl sm:text-4xl">
               Alamat Kantor & Lokasi Produksi
             </h2>
-            <p className="text-sm text-[#737D77] leading-relaxed">
+            <p className="text-sm text-[#57615B] leading-relaxed">
               Lokasi kantor BMMF di Sawangan, Magelang telah terhubung dengan tautan Google Maps
               terverifikasi, sementara koordinat presisi lokasi produksi di Turi masih menunggu
               verifikasi internal. Silakan konfirmasikan jadwal kunjungan terlebih dahulu melalui
@@ -296,12 +275,12 @@ export function AboutPage() {
                     <MapPin className="w-5 h-5 shrink-0" aria-hidden="true" />
                     <h3 className="font-display font-bold text-xl">{loc.title}</h3>
                   </div>
-                  <p className="text-xs font-medium text-[#737D77]">{loc.city}</p>
+                  <p className="text-xs font-medium text-[#57615B]">{loc.city}</p>
                   <p className="text-[15px] text-[#27312D] leading-relaxed">{loc.address}</p>
                 </div>
 
                 <div className="pt-4 border-t border-[#E3E8E3] flex flex-wrap items-center justify-between gap-4">
-                  <span className="text-xs text-[#737D77]">
+                  <span className="text-xs text-[#57615B]">
                     {loc.coordinatesVerified
                       ? 'Koordinat & rute Google Maps terverifikasi'
                       : 'Koordinat presisi menunggu verifikasi internal'}
@@ -323,7 +302,7 @@ export function AboutPage() {
           </div>
 
           <Reveal className="mt-7 pt-5 border-t border-[#E3E8E3] flex flex-wrap items-center justify-between gap-4">
-            <p className="text-sm text-[#737D77]">
+            <p className="text-sm text-[#57615B]">
               Tertarik menjajaki layanan maklon atau pengadaan produk susu bubuk bersama BMMF?
             </p>
             <div className="flex flex-wrap items-center gap-3">

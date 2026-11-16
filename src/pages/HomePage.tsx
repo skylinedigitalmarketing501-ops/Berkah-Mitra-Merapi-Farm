@@ -5,7 +5,9 @@ import { ArrowRight, ArrowUpRight, MessageSquare } from 'lucide-react';
 import { companyConfig, getWhatsAppMaklonUrl } from '../config/company';
 import { SeoHead } from '../components/SeoHead';
 import { SafeImage } from '../components/SafeImage';
+import { HeroVideoPlayer } from '../components/HeroVideoPlayer';
 import { HeroEntrance, Reveal } from '../components/MotionPrimitives';
+import { trackConversionEvent } from '../utils/analytics';
 
 const whyPartnerPoints = [
   {
@@ -81,6 +83,14 @@ export function HomePage() {
                 <div className="flex flex-wrap items-center gap-3.5 pt-2">
                   <Link
                     to="/layanan-maklon"
+                    onClick={() =>
+                      trackConversionEvent({
+                        event: 'cta_maklon_click',
+                        source: 'home_hero',
+                        inquiryType: 'Maklon',
+                        channel: 'route',
+                      })
+                    }
                     className="bmmf-sheen group inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-[15px] font-medium text-white bg-[#183D32] hover:bg-[#102B24] rounded-[11px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap"
                   >
                     <span>Konsultasi Maklon</span>
@@ -88,6 +98,14 @@ export function HomePage() {
                   </Link>
                   <Link
                     to="/produk-susu-bubuk"
+                    onClick={() =>
+                      trackConversionEvent({
+                        event: 'cta_product_quote_click',
+                        source: 'home_hero',
+                        inquiryType: 'Pemesanan Susu Bubuk',
+                        channel: 'route',
+                      })
+                    }
                     className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-[15px] font-medium text-[#183D32] bg-white hover:bg-[#F5F3ED] border border-[#E3E8E3] rounded-[11px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap"
                   >
                     <span>Jelajahi Produk</span>
@@ -96,7 +114,7 @@ export function HomePage() {
               </HeroEntrance>
 
               <HeroEntrance delay={0.22}>
-                <div className="pt-4 border-t border-[#E3E8E3] flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[#737D77]">
+                <div className="pt-4 border-t border-[#E3E8E3] flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[#57615B]">
                   <span>Kantor: Kab. Magelang, Jawa Tengah</span>
                   <span aria-hidden="true">·</span>
                   <span>Produksi: Kab. Sleman, DI Yogyakarta</span>
@@ -106,36 +124,15 @@ export function HomePage() {
 
             <div className="lg:col-span-6">
               <HeroEntrance delay={0.14}>
-                <figure className="w-full">
-                  <div className="relative">
-                    <div
-                      aria-hidden="true"
-                      className="bmmf-glow-breathe hidden sm:block absolute -top-3 -right-3 w-20 h-20 border-t-2 border-r-2 border-[#D3B785] rounded-tr-2xl pointer-events-none"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="bmmf-glow-breathe hidden sm:block absolute -bottom-3 -left-3 w-20 h-20 border-b-2 border-l-2 border-[#183D32]/35 rounded-bl-2xl pointer-events-none"
-                    />
-                    <div className="relative overflow-hidden bg-[#F5F3ED] border border-[#E3E8E3] rounded-xl aspect-video">
-                      <video
-                        src={companyConfig.media.heroVideo.src}
-                        aria-label={companyConfig.media.heroVideo.alt}
-                        autoPlay={!prefersReduced}
-                        controls={Boolean(prefersReduced)}
-                        loop
-                        muted
-                        playsInline
-                        preload="metadata"
-                        className="block w-full h-full object-contain"
-                      >
-                        Browser Anda tidak mendukung pemutaran video HTML5.
-                      </video>
-                    </div>
-                  </div>
-                  <figcaption className="mt-2.5 text-xs text-[#737D77] leading-relaxed text-center sm:text-left">
-                    {companyConfig.media.heroVideo.caption}
-                  </figcaption>
-                </figure>
+                <HeroVideoPlayer
+                  src={companyConfig.media.heroVideo.src}
+                  posterSrc={companyConfig.media.heroVideo.poster}
+                  posterSrcSet={companyConfig.media.heroVideo.posterSrcSet}
+                  posterSizes="(max-width: 1024px) 100vw, 48vw"
+                  trackSrc={companyConfig.media.heroVideo.trackSrc}
+                  alt={companyConfig.media.heroVideo.alt}
+                  caption={companyConfig.media.heroVideo.caption}
+                />
               </HeroEntrance>
             </div>
           </div>
@@ -149,6 +146,10 @@ export function HomePage() {
             <Reveal className="lg:col-span-5 order-2 lg:order-1">
               <SafeImage
                 src={companyConfig.media.intro.src}
+                srcSet={companyConfig.media.intro.srcSet}
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                width={960}
+                height={720}
                 alt={companyConfig.media.intro.alt}
                 caption={companyConfig.media.intro.caption}
                 isPlaceholder={companyConfig.media.intro.isPlaceholder}
@@ -157,7 +158,7 @@ export function HomePage() {
             </Reveal>
 
             <Reveal delay={0.08} className="lg:col-span-7 order-1 lg:order-2 space-y-4">
-              <p className="text-xs sm:text-[13px] font-medium tracking-[0.14em] uppercase text-[#737D77]">
+              <p className="text-xs sm:text-[13px] font-medium tracking-[0.14em] uppercase text-[#57615B]">
                 MENGENAL BMMF
               </p>
               <h2 className="font-display font-bold text-[#183D32] tracking-[-0.02em] leading-[1.15] text-[30px] sm:text-[38px] lg:text-[44px]">
@@ -169,7 +170,7 @@ export function HomePage() {
                 pada 2022, kami membangun kegiatan produksi dengan perhatian pada mutu bahan baku,
                 ketertiban pengolahan, dan kerja sama bisnis yang transparan.
               </p>
-              <p className="text-[15px] text-[#737D77] leading-[1.7] max-w-2xl">
+              <p className="text-[15px] text-[#57615B] leading-[1.7] max-w-2xl">
                 Dengan kantor administrasi di Sawangan, Magelang dan kegiatan produksi di Turi,
                 Sleman, BMMF mendukung pelaku usaha baik melalui pengadaan produk susu bubuk maupun
                 pengembangan merek melalui layanan maklon.
@@ -199,14 +200,14 @@ export function HomePage() {
           <Reveal>
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-[#E3E8E3]">
               <div>
-                <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
+                <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#57615B]">
                   RINGKASAN PROFIL PERUSAHAAN
                 </p>
                 <h2 className="font-display font-bold text-[#183D32] text-2xl sm:text-3xl mt-1.5">
                   Identitas Operasional & Fokus Layanan
                 </h2>
               </div>
-              <p className="text-xs text-[#737D77] max-w-md leading-relaxed">
+              <p className="text-xs text-[#57615B] max-w-md leading-relaxed">
                 Seluruh informasi disajikan sesuai data profil resmi dan ditandai apabila masih
                 menunggu konfirmasi internal manajemen.
               </p>
@@ -215,7 +216,7 @@ export function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
               {companyConfig.highlights.map((item) => (
                 <div key={item.id} className="space-y-2 border-t border-[#183D32]/15 pt-5">
-                  <p className="text-xs font-medium text-[#737D77]">{item.label}</p>
+                  <p className="text-xs font-medium text-[#57615B]">{item.label}</p>
                   <p className="font-display font-bold text-xl sm:text-2xl text-[#183D32] tracking-tight">
                     {item.value}
                   </p>
@@ -233,7 +234,7 @@ export function HomePage() {
       <section className="bg-white py-9 sm:py-12 lg:py-14 border-b border-[#E3E8E3]">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <Reveal className="max-w-2xl space-y-2.5 mb-7 lg:mb-8">
-            <p className="text-xs sm:text-[13px] font-medium tracking-[0.14em] uppercase text-[#737D77]">
+            <p className="text-xs sm:text-[13px] font-medium tracking-[0.14em] uppercase text-[#57615B]">
               LAYANAN KAMI
             </p>
             <h2 className="font-display font-bold text-[#183D32] tracking-[-0.02em] leading-[1.14] text-[30px] sm:text-[38px] lg:text-[44px]">
@@ -271,6 +272,10 @@ export function HomePage() {
               <div className="px-5 sm:px-7 pb-5 sm:pb-7">
                 <SafeImage
                   src={companyConfig.media.serviceMaklon.src}
+                  srcSet={companyConfig.media.serviceMaklon.srcSet}
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  width={960}
+                  height={540}
                   alt={companyConfig.media.serviceMaklon.alt}
                   aspectClassName="aspect-[16/9]"
                   caption=""
@@ -300,6 +305,14 @@ export function HomePage() {
                 <div className="pt-2">
                   <Link
                     to="/produk-susu-bubuk"
+                    onClick={() =>
+                      trackConversionEvent({
+                        event: 'cta_product_quote_click',
+                        source: 'home_services_card',
+                        inquiryType: 'Pemesanan Susu Bubuk',
+                        channel: 'route',
+                      })
+                    }
                     className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-[#183D32] bg-white hover:bg-[#F5F3ED] border border-[#E3E8E3] rounded-[10px] transition-colors whitespace-nowrap"
                   >
                     <span>Jelajahi Produk Susu Bubuk</span>
@@ -310,6 +323,10 @@ export function HomePage() {
               <div className="px-5 sm:px-7 pb-5 sm:pb-7">
                 <SafeImage
                   src={companyConfig.media.serviceB2bOrder.src}
+                  srcSet={companyConfig.media.serviceB2bOrder.srcSet}
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  width={960}
+                  height={540}
                   alt={companyConfig.media.serviceB2bOrder.alt}
                   aspectClassName="aspect-[16/9]"
                   caption=""
@@ -325,13 +342,13 @@ export function HomePage() {
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
             <Reveal className="lg:col-span-5 space-y-4 lg:sticky lg:top-24">
-              <p className="text-xs sm:text-[13px] font-medium tracking-[0.14em] uppercase text-[#737D77]">
+              <p className="text-xs sm:text-[13px] font-medium tracking-[0.14em] uppercase text-[#57615B]">
                 KEUNGGULAN KEMITRAAN
               </p>
               <h2 className="font-display font-bold text-[#183D32] tracking-[-0.02em] leading-[1.14] text-[30px] sm:text-[38px] lg:text-[42px]">
                 Bangun Produk Anda Bersama Mitra Produksi yang Tepat.
               </h2>
-              <p className="text-base text-[#737D77] leading-[1.65]">
+              <p className="text-base text-[#57615B] leading-[1.65]">
                 Setiap kerja sama di BMMF diawali dengan komunikasi kebutuhan yang jelas,
                 peninjauan kelayakan teknis, serta kesepakatan tertulis yang realistis tanpa klaim
                 berlebihan.
@@ -358,7 +375,7 @@ export function HomePage() {
                       <h3 className="font-display font-semibold text-lg sm:text-xl text-[#183D32]">
                         {item.title}
                       </h3>
-                      <p className="text-[15px] text-[#737D77] leading-relaxed">{item.text}</p>
+                      <p className="text-[15px] text-[#57615B] leading-relaxed">{item.text}</p>
                     </div>
                   </div>
                 </Reveal>
@@ -373,6 +390,12 @@ export function HomePage() {
         <div className="relative min-h-[340px] sm:min-h-[390px] lg:min-h-[420px] flex items-end">
           <motion.img
             src={companyConfig.media.hero.src}
+            srcSet={companyConfig.media.hero.srcSet}
+            sizes="100vw"
+            width={1440}
+            height={810}
+            loading="lazy"
+            decoding="async"
             alt={companyConfig.media.hero.alt}
             referrerPolicy="no-referrer"
             style={prefersReduced ? undefined : { scale: imageScale }}
@@ -432,6 +455,14 @@ export function HomePage() {
               <div className="flex flex-wrap items-center gap-3.5 pt-2">
                 <Link
                   to="/kontak?kebutuhan=Maklon"
+                  onClick={() =>
+                    trackConversionEvent({
+                      event: 'cta_maklon_click',
+                      source: 'home_bottom_cta',
+                      inquiryType: 'Maklon',
+                      channel: 'route',
+                    })
+                  }
                   className="bmmf-sheen-gold bmmf-sheen-delay-1 group inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-[15px] font-medium text-[#102B24] bg-[#D3B785] hover:bg-[#e1c99e] rounded-[11px] transition-all duration-200 hover:-translate-y-[1px] whitespace-nowrap"
                 >
                   <span>Mulai Konsultasi Maklon</span>
@@ -439,6 +470,14 @@ export function HomePage() {
                 </Link>
                 <Link
                   to="/kontak?kebutuhan=Pemesanan%20Susu%20Bubuk"
+                  onClick={() =>
+                    trackConversionEvent({
+                      event: 'cta_product_quote_click',
+                      source: 'home_bottom_cta',
+                      inquiryType: 'Pemesanan Susu Bubuk',
+                      channel: 'route',
+                    })
+                  }
                   className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-[15px] font-medium text-white border border-white/25 hover:bg-white/10 rounded-[11px] transition-colors duration-200 whitespace-nowrap"
                 >
                   <span>Minta Penawaran Produk</span>
@@ -447,6 +486,14 @@ export function HomePage() {
                   href={getWhatsAppMaklonUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackConversionEvent({
+                      event: 'whatsapp_open',
+                      source: 'home_bottom_cta',
+                      inquiryType: 'Maklon',
+                      channel: 'whatsapp',
+                    })
+                  }
                   className="inline-flex items-center gap-2 px-5 py-3.5 text-sm font-medium text-[#D3B785] hover:underline whitespace-nowrap"
                 >
                   <MessageSquare className="w-4 h-4" aria-hidden="true" />
@@ -461,6 +508,7 @@ export function HomePage() {
                   <span className="w-10 h-10 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0">
                     <img
                       src={companyConfig.logo.src}
+                      srcSet={companyConfig.logo.srcSet}
                       alt={companyConfig.logo.alt}
                       width={32}
                       height={32}

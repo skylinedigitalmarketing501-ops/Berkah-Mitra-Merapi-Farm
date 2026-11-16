@@ -19,6 +19,7 @@ export interface ArticleItem {
   isExample: boolean;
   featured?: boolean;
   coverImage: string;
+  coverImageSrcSet?: string;
   coverAlt: string;
   body: string[];
 }
@@ -47,6 +48,7 @@ export const editorialArticles: ArticleItem[] = [
     isExample: true,
     featured: true,
     coverImage: companyConfig.media.articleProcessControl.src,
+    coverImageSrcSet: companyConfig.media.articleProcessControl.srcSet,
     coverAlt: companyConfig.media.articleProcessControl.alt,
     body: [
       'Dalam industri pengolahan pangan berbentuk serbuk, ketertiban alur kerja merupakan faktor mendasar yang menentukan konsistensi hasil dari satu siklus produksi ke siklus berikutnya. Setiap tahapan mulai dari penerimaan bahan hingga penyimpanan akhir saling berkaitan.',
@@ -66,6 +68,7 @@ export const editorialArticles: ArticleItem[] = [
       'Tinjauan edukatif mengenai keunggulan penyimpanan pangan kering berbentuk bubuk serta faktor kemasan yang memengaruhi ketahanan mutu selama distribusi.',
     isExample: true,
     coverImage: companyConfig.media.articleEtawaPowder.src,
+    coverImageSrcSet: companyConfig.media.articleEtawaPowder.srcSet,
     coverAlt: companyConfig.media.articleEtawaPowder.alt,
     body: [
       'Pengolahan susu kambing Etawa menjadi bentuk bubuk bertujuan memudahkan penanganan logistik, memperpanjang stabilitas penyimpanan pada suhu ruang yang tepat, serta mempermudah penakaran dalam penyajian.',
@@ -85,6 +88,7 @@ export const editorialArticles: ArticleItem[] = [
       'Kesadaran kebersihan personal dan keteraturan prosedur operasional merupakan fondasi utama sumber daya manusia di lingkungan manufaktur makanan dan minuman.',
     isExample: true,
     coverImage: companyConfig.media.teamWorkplace.src,
+    coverImageSrcSet: companyConfig.media.teamWorkplace.srcSet,
     coverAlt: companyConfig.media.teamWorkplace.alt,
     body: [
       'Peralatan produksi yang tertata rapi perlu diimbangi dengan kedisiplinan personel yang mengoperasikannya setiap hari. Di lingkungan pengolahan pangan, kepatuhan terhadap penggunaan perlengkapan pelindung higienis serta prosedur sanitasi merupakan kebiasaan kerja yang tidak terpisahkan.',
@@ -103,6 +107,7 @@ export const editorialArticles: ArticleItem[] = [
       'Panduan ringkas bagi pemilik merek atau pelaku distribusi mengenai poin komunikasi awal agar pembahasan kerja sama produksi dan pengadaan berjalan efektif.',
     isExample: true,
     coverImage: companyConfig.media.articleB2bMeeting.src,
+    coverImageSrcSet: companyConfig.media.articleB2bMeeting.srcSet,
     coverAlt: companyConfig.media.articleB2bMeeting.alt,
     body: [
       'Komunikasi awal yang terstruktur membantu kedua belah pihak memahami ruang lingkup kerja sama secara realistis. Sebelum pertemuan teknis, calon mitra sebaiknya menyiapkan gambaran kategori produk yang dibutuhkan, target pasar, serta perkiraan alur distribusi.',
@@ -121,6 +126,7 @@ export const editorialArticles: ArticleItem[] = [
       'Informasi ringkas mengenai letak administratif kantor perusahaan dan lokasi produksi yang tercatat dalam profil CV. Berkah Mitra Merapi Farm.',
     isExample: true,
     coverImage: companyConfig.media.articleMerapiOffice.src,
+    coverImageSrcSet: companyConfig.media.articleMerapiOffice.srcSet,
     coverAlt: companyConfig.media.articleMerapiOffice.alt,
     body: [
       'Dalam menjalankan operasionalnya, CV. Berkah Mitra Merapi Farm memiliki alamat kantor di Jl. Penggaron - Gn. Lemah No.89, Payakan, Gondowangi, Kec. Sawangan, Kabupaten Magelang, Jawa Tengah 56481, serta lokasi produksi di wilayah Sidorejo, Nganggring, Girikerto, Turi, Kab. Sleman, DI Yogyakarta.',
@@ -139,6 +145,7 @@ export const editorialArticles: ArticleItem[] = [
       'Panduan awal bagi calon pemilik merek mengenai aspek konsep produk, segmentasi distribusi, dan kemasan yang perlu didiskusikan bersama mitra maklon.',
     isExample: true,
     coverImage: companyConfig.media.articleMaklonConcept.src,
+    coverImageSrcSet: companyConfig.media.articleMaklonConcept.srcSet,
     coverAlt: companyConfig.media.articleMaklonConcept.alt,
     body: [
       'Memulai produk susu bubuk dengan merek sendiri memerlukan keselarasan antara konsep pemasaran dan kesiapan proses manufaktur. Sebelum berkonsultasi dengan mitra produksi, calon pemilik merek disarankan memetakan segmen konsumen serta kisaran volume pengadaan tahap awal.',

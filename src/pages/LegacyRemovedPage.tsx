@@ -12,11 +12,11 @@ export function LegacyRemovedPage() {
       />
       <section className="bg-white py-14 sm:py-20">
         <div className="mx-auto max-w-xl px-4 text-center space-y-5">
-          <p className="font-mono text-xs font-medium text-[#737D77]">410 · HALAMAN DIHAPUS</p>
+          <p className="font-mono text-xs font-medium text-[#57615B]">410 · HALAMAN DIHAPUS</p>
           <h1 className="font-display font-bold text-3xl sm:text-4xl text-[#183D32]">
             Halaman Tidak Lagi Tersedia
           </h1>
-          <p className="text-sm sm:text-base text-[#737D77] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#57615B] leading-relaxed">
             Halaman yang Anda buka telah dinonaktifkan. Website resmi CV. Berkah Mitra Merapi Farm
             kini berfokus pada informasi profil perusahaan, layanan maklon susu bubuk, dan
             pemesanan produk B2B.

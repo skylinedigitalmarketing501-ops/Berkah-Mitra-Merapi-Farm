@@ -39,10 +39,15 @@ export function SeoHead({
       : `${title} — ${companyConfig.webName}`;
     document.title = fullTitle;
 
-    const origin =
+    const rawOrigin =
       typeof window !== 'undefined' && window.location.origin
         ? window.location.origin
         : companyConfig.canonicalBaseUrl;
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    const origin =
+      hostname === 'berkahmitramerapifarm.com' || hostname === 'www.berkahmitramerapifarm.com'
+        ? companyConfig.canonicalBaseUrl
+        : rawOrigin;
     const canonicalUrl = `${origin}${path}`;
 
     upsertMeta('name', 'description', description);
@@ -71,7 +76,7 @@ export function SeoHead({
         name: companyConfig.officialName,
         alternateName: companyConfig.shortName,
         url: origin,
-        logo: `${origin}${companyConfig.logo.src}`,
+        logo: `${origin}${companyConfig.logo.ogSrc}`,
         description:
           'Perusahaan industri pengolahan susu kambing Etawa bubuk, mitra produksi susu bubuk, dan layanan maklon susu bubuk B2B.',
         knowsAbout: [

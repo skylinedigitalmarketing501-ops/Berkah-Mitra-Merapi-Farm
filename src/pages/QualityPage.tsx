@@ -38,6 +38,10 @@ export function QualityPage() {
             <div className="lg:col-span-5">
               <SafeImage
                 src={companyConfig.media.qualityHeader.src}
+                srcSet={companyConfig.media.qualityHeader.srcSet}
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                width={960}
+                height={720}
                 alt={companyConfig.media.qualityHeader.alt}
                 caption={companyConfig.media.qualityHeader.caption}
                 isPlaceholder={companyConfig.media.qualityHeader.isPlaceholder}
@@ -53,7 +57,7 @@ export function QualityPage() {
       <section className="bg-white py-9 sm:py-12 border-b border-[#E3E8E3]">
         <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
           <Reveal className="max-w-2xl space-y-2.5 mb-6">
-            <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
+            <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#57615B]">
               KERANGKA PENJAGAAN MUTU
             </p>
             <h2 className="font-display font-bold text-[#183D32] text-2xl sm:text-4xl">
@@ -75,7 +79,7 @@ export function QualityPage() {
                   <span className="w-6 h-[1px] bg-[#D3B785]" aria-hidden="true" />
                 </div>
                 <h3 className="font-display font-bold text-xl text-[#183D32]">{pillar.title}</h3>
-                <p className="text-sm text-[#737D77] leading-relaxed flex-1">
+                <p className="text-sm text-[#57615B] leading-relaxed flex-1">
                   {pillar.description}
                 </p>
                 <ul className="pt-4 border-t border-[#E3E8E3] space-y-2">
@@ -102,7 +106,7 @@ export function QualityPage() {
             <div className="flex items-start gap-4">
               <FileCheck2 className="w-6 h-6 text-[#183D32] shrink-0 mt-1" aria-hidden="true" />
               <div className="space-y-3 max-w-3xl">
-                <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#737D77]">
+                <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#57615B]">
                   STATUS SERTIFIKASI & PERIZINAN
                 </p>
                 <h2 className="font-display font-bold text-2xl sm:text-3xl text-[#183D32]">
@@ -117,7 +121,7 @@ export function QualityPage() {
                         className="border border-[#E3E8E3] rounded-xl p-4 space-y-1"
                       >
                         <p className="font-semibold text-sm text-[#183D32]">{cert.name}</p>
-                        <p className="text-xs text-[#737D77]">Ruang lingkup: {cert.scope}</p>
+                        <p className="text-xs text-[#57615B]">Ruang lingkup: {cert.scope}</p>
                         {cert.documentNumber && (
                           <p className="font-mono text-xs text-[#27312D]">{cert.documentNumber}</p>
                         )}
@@ -131,7 +135,7 @@ export function QualityPage() {
                       izin edar BPOM, NKV, maupun sertifikasi mutu lainnya—apabila salinan dokumen
                       dan ruang lingkup produknya telah diverifikasi secara langsung.
                     </p>
-                    <p className="text-sm text-[#737D77]">
+                    <p className="text-sm text-[#57615B]">
                       Kami tidak memasang logo sertifikasi tanpa bukti pendukung ataupun mengklaim
                       seluruh produk telah tersertifikasi secara menyeluruh sebelum verifikasi
                       masing-masing dokumen selesai dilakukan.

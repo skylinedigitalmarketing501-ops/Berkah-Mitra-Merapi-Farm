@@ -16,7 +16,7 @@ export function ArticleDetailPage() {
     return (
       <section className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 py-12 text-center space-y-4">
         <h1 className="font-display font-bold text-3xl text-[#183D32]">Artikel Tidak Ditemukan</h1>
-        <p className="text-sm text-[#737D77]">
+        <p className="text-sm text-[#57615B]">
           Tautan artikel yang Anda buka mungkin telah diperbarui atau tidak tersedia.
         </p>
         <Link
@@ -70,7 +70,7 @@ export function ArticleDetailPage() {
           <Breadcrumb items={[{ label: 'Artikel', path: '/artikel' }, { label: article.title }]} />
 
           <header className="space-y-4 pb-5 border-b border-[#E3E8E3]">
-            <div className="flex flex-wrap items-center gap-2 text-xs text-[#737D77]">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-[#57615B]">
               <span className="font-semibold text-[#183D32]">{article.category}</span>
               <span aria-hidden="true">·</span>
               <time dateTime={article.publishedAt}>{article.publishedAt}</time>
@@ -90,7 +90,7 @@ export function ArticleDetailPage() {
               {article.title}
             </h1>
 
-            <p className="text-base sm:text-lg text-[#737D77] leading-relaxed">{article.excerpt}</p>
+            <p className="text-base sm:text-lg text-[#57615B] leading-relaxed">{article.excerpt}</p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
@@ -120,6 +120,10 @@ export function ArticleDetailPage() {
           <div className="py-5">
             <SafeImage
               src={article.coverImage}
+              srcSet={article.coverImageSrcSet}
+              sizes="(max-width: 896px) 100vw, 832px"
+              width={960}
+              height={540}
               alt={article.coverAlt}
               aspectClassName="aspect-[16/9]"
               caption="Visual ilustrasi artikel — menunggu dokumentasi foto resmi BMMF."
@@ -156,7 +160,7 @@ export function ArticleDetailPage() {
                 key={rel.id}
                 className="bg-white border border-[#E3E8E3] rounded-2xl p-6 space-y-2.5"
               >
-                <p className="text-xs text-[#737D77]">
+                <p className="text-xs text-[#57615B]">
                   {rel.category} · {rel.publishedAt}
                 </p>
                 <h3 className="font-display font-bold text-lg text-[#183D32] leading-snug">
@@ -164,7 +168,7 @@ export function ArticleDetailPage() {
                     {rel.title}
                   </Link>
                 </h3>
-                <p className="text-xs text-[#737D77] line-clamp-2">{rel.excerpt}</p>
+                <p className="text-xs text-[#57615B] line-clamp-2">{rel.excerpt}</p>
               </article>
             ))}
           </div>

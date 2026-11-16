@@ -15,8 +15,45 @@ import { buildWhatsAppUrl, companyConfig } from '../config/company';
 import { SeoHead } from '../components/SeoHead';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { Reveal } from '../components/MotionPrimitives';
+import { trackConversionEvent } from '../utils/analytics';
 
 const inquiryOptions = ['Maklon', 'Pemesanan Susu Bubuk'] as const;
+
+function buildContactWhatsAppHref(params: {
+  inquiryType: string;
+  fullName: string;
+  companyName: string;
+  whatsapp: string;
+  email: string;
+  productInterest: string;
+  estimatedVolume: string;
+  packagingPreference: string;
+  message: string;
+  referenceId?: string;
+}): string {
+  const summary = [
+    params.inquiryType === 'Maklon'
+      ? 'Halo, tim BMMF. Saya tertarik untuk berkonsultasi mengenai layanan maklon susu bubuk.'
+      : 'Halo, tim BMMF. Saya ingin menanyakan informasi produk susu bubuk dan melakukan permintaan penawaran.',
+    params.referenceId ? `Kode Referensi Formulir: ${params.referenceId}` : null,
+    '',
+    `Nama Lengkap: ${params.fullName || '-'}`,
+    `Nama Usaha/Perusahaan: ${params.companyName || '-'}`,
+    `WhatsApp: ${params.whatsapp || '-'}`,
+    `Email: ${params.email || '-'}`,
+    `Jenis Kebutuhan: ${params.inquiryType}`,
+    `Produk yang Diminati: ${params.productInterest || '-'}`,
+    params.estimatedVolume ? `Perkiraan Jumlah Pemesanan: ${params.estimatedVolume}` : null,
+    params.packagingPreference ? `Pilihan Kemasan: ${params.packagingPreference}` : null,
+    '',
+    'Catatan Kebutuhan:',
+    params.message || 'Mohon informasi lebih lanjut mengenai prosedur dan penawaran.',
+  ]
+    .filter((line): line is string => line !== null)
+    .join('\n');
+
+  return buildWhatsAppUrl(summary);
+}
 
 export function ContactPage() {
   const [searchParams] = useSearchParams();
@@ -27,7 +64,7 @@ export function ContactPage() {
   const [companyName, setCompanyName] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [email, setEmail] = useState('');
-  const [inquiryType, setInquiryType] = useState<string>(
+  const [inquiryType, setInquiryType] = useState<'Maklon' | 'Pemesanan Susu Bubuk'>(
     initialNeed === 'Pemesanan Susu Bubuk' ? 'Pemesanan Susu Bubuk' : 'Maklon'
   );
   const [productInterest, setProductInterest] = useState(
@@ -44,6 +81,7 @@ export function ContactPage() {
     ok: boolean;
     message: string;
     referenceId?: string;
+    whatsappFollowUpHref?: string;
   } | null>(null);
 
   useEffect(() => {
@@ -55,33 +93,73 @@ export function ContactPage() {
     }
   }, [initialNeed, initialProduct]);
 
-  const formattedWhatsAppSummary = [
-    inquiryType === 'Maklon'
-      ? 'Halo, tim BMMF. Saya tertarik untuk berkonsultasi mengenai layanan maklon susu bubuk.'
-      : 'Halo, tim BMMF. Saya ingin menanyakan informasi produk susu bubuk dan melakukan permintaan penawaran.',
-    '',
-    `Nama Lengkap: ${fullName || '-'}`,
-    `Nama Usaha/Perusahaan: ${companyName || '-'}`,
-    `WhatsApp: ${whatsapp || '-'}`,
-    `Email: ${email || '-'}`,
-    `Jenis Kebutuhan: ${inquiryType}`,
-    `Produk yang Diminati: ${productInterest || '-'}`,
-    estimatedVolume ? `Perkiraan Jumlah Pemesanan: ${estimatedVolume}` : null,
-    packagingPreference ? `Pilihan Kemasan: ${packagingPreference}` : null,
-    '',
-    'Catatan Kebutuhan:',
-    message || 'Mohon informasi lebih lanjut mengenai prosedur dan penawaran.',
-  ]
-    .filter((line): line is string => line !== null)
-    .join('\n');
-
-  const whatsappDirectHref = buildWhatsAppUrl(formattedWhatsAppSummary);
+  const whatsappDirectHref = buildContactWhatsAppHref({
+    inquiryType,
+    fullName,
+    companyName,
+    whatsapp,
+    email,
+    productInterest,
+    estimatedVolume,
+    packagingPreference,
+    message,
+  });
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (submitting) return;
     setSubmitResult(null);
 
+    const trimmedName = fullName.trim();
+    const trimmedCompany = companyName.trim();
+    const cleanedDigits = whatsapp.replace(/[^\d+]/g, '');
+    const trimmedEmail = email.trim().toLowerCase();
+    const trimmedProduct = productInterest.trim();
+    const trimmedMessage = message.trim();
+
+    if (trimmedName.length < 2) {
+      setSubmitResult({
+        ok: false,
+        message: 'Nama lengkap wajib diisi minimal 2 karakter.',
+      });
+      return;
+    }
+    if (trimmedCompany.length < 2) {
+      setSubmitResult({
+        ok: false,
+        message: 'Nama usaha atau perusahaan wajib diisi minimal 2 karakter.',
+      });
+      return;
+    }
+    if (cleanedDigits.length < 9 || cleanedDigits.length > 18) {
+      setSubmitResult({
+        ok: false,
+        message: 'Nomor WhatsApp wajib valid (minimal 9 digit angka).',
+      });
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmedEmail)) {
+      setSubmitResult({
+        ok: false,
+        message: 'Format alamat email bisnis tidak valid.',
+      });
+      return;
+    }
+    if (trimmedProduct.length < 2) {
+      setSubmitResult({
+        ok: false,
+        message: 'Jenis produk yang diminati wajib diisi.',
+      });
+      return;
+    }
+    if (trimmedMessage.length < 10) {
+      setSubmitResult({
+        ok: false,
+        message:
+          'Catatan kebutuhan minimal 10 karakter agar tim kami dapat menyiapkan respons yang tepat.',
+      });
+      return;
+    }
     if (!privacyConsent) {
       setSubmitResult({
         ok: false,
@@ -90,21 +168,33 @@ export function ContactPage() {
       return;
     }
 
+    const snapshotWhatsAppArgs = {
+      inquiryType,
+      fullName: trimmedName,
+      companyName: trimmedCompany,
+      whatsapp: whatsapp.trim(),
+      email: trimmedEmail,
+      productInterest: trimmedProduct,
+      estimatedVolume: estimatedVolume.trim(),
+      packagingPreference: packagingPreference.trim(),
+      message: trimmedMessage,
+    };
+
     setSubmitting(true);
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          fullName,
-          companyName,
-          whatsapp,
-          email,
+          fullName: trimmedName,
+          companyName: trimmedCompany,
+          whatsapp: whatsapp.trim(),
+          email: trimmedEmail,
           inquiryType,
-          productInterest,
-          estimatedVolume,
-          packagingPreference,
-          message,
+          productInterest: trimmedProduct,
+          estimatedVolume: estimatedVolume.trim(),
+          packagingPreference: packagingPreference.trim(),
+          message: trimmedMessage,
           privacyConsent,
           website_url: honeypot,
         }),
@@ -117,10 +207,21 @@ export function ContactPage() {
           message: data.message || 'Gagal mengirim permintaan penawaran. Periksa kembali isian Anda.',
         });
       } else {
+        trackConversionEvent({
+          event: 'lead_form_submitted',
+          source: 'contact_form',
+          inquiryType,
+          channel: 'form',
+        });
+
         setSubmitResult({
           ok: true,
           message: data.message,
           referenceId: data.referenceId,
+          whatsappFollowUpHref: buildContactWhatsAppHref({
+            ...snapshotWhatsAppArgs,
+            referenceId: data.referenceId,
+          }),
         });
         setFullName('');
         setCompanyName('');
@@ -179,6 +280,8 @@ export function ContactPage() {
                   <div className="w-12 h-12 rounded-xl bg-white border border-[#E3E8E3] p-1.5 flex items-center justify-center shrink-0">
                     <img
                       src={companyConfig.logo.src}
+                      srcSet={companyConfig.logo.srcSet}
+                      sizes="40px"
                       alt={companyConfig.logo.alt}
                       width={40}
                       height={40}
@@ -186,7 +289,7 @@ export function ContactPage() {
                     />
                   </div>
                   <div>
-                    <p className="text-xs font-medium tracking-[0.12em] uppercase text-[#737D77]">
+                    <p className="text-xs font-medium tracking-[0.12em] uppercase text-[#57615B]">
                       IDENTITAS & KONTAK RESMI
                     </p>
                     <h2 className="font-display font-bold text-lg sm:text-xl text-[#183D32] mt-0.5">
@@ -202,7 +305,7 @@ export function ContactPage() {
                       <p className="font-semibold text-[#183D32]">
                         {companyConfig.locations.office.title}
                       </p>
-                      <p className="text-[#737D77] leading-relaxed">
+                      <p className="text-[#57615B] leading-relaxed">
                         {companyConfig.locations.office.address}
                       </p>
                     </div>
@@ -214,7 +317,7 @@ export function ContactPage() {
                       <p className="font-semibold text-[#183D32]">
                         {companyConfig.locations.production.title}
                       </p>
-                      <p className="text-[#737D77] leading-relaxed">
+                      <p className="text-[#57615B] leading-relaxed">
                         {companyConfig.locations.production.address}
                       </p>
                     </div>
@@ -228,6 +331,13 @@ export function ContactPage() {
                         href={`https://wa.me/${companyConfig.contact.whatsappNumber}`}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() =>
+                          trackConversionEvent({
+                            event: 'whatsapp_open',
+                            source: 'contact_info_card',
+                            channel: 'whatsapp',
+                          })
+                        }
                         className="text-[#27312D] hover:text-[#183D32] hover:underline tabular-nums"
                       >
                         {companyConfig.contact.whatsappDisplay}
@@ -253,7 +363,7 @@ export function ContactPage() {
                     <div className="space-y-1">
                       <p className="font-semibold text-[#183D32]">Jam Operasional (Referensi)</p>
                       <p className="text-[#27312D]">{companyConfig.contact.operationalHours}</p>
-                      <p className="text-xs text-[#737D77]">
+                      <p className="text-xs text-[#57615B]">
                         {companyConfig.contact.operationalHoursNote}
                       </p>
                     </div>
@@ -266,7 +376,7 @@ export function ContactPage() {
                 className="border border-[#E3E8E3] rounded-2xl p-5 sm:p-6 space-y-3.5 bg-white"
               >
                 <div className="space-y-1.5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[#737D77]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[#57615B]">
                     PETA & VERIFIKASI LOKASI
                   </p>
                   <p className="text-sm text-[#27312D] leading-relaxed">
@@ -320,7 +430,7 @@ export function ContactPage() {
                 <h2 className="font-display font-bold text-2xl text-[#183D32]">
                   Formulir Permintaan Penawaran
                 </h2>
-                <p className="text-sm text-[#737D77]">
+                <p className="text-sm text-[#57615B]">
                   Lengkapi detail kebutuhan bisnis Anda agar tim kami dapat menyiapkan informasi dan
                   langkah tindak lanjut yang relevan.
                 </p>
@@ -425,7 +535,13 @@ export function ContactPage() {
                     <select
                       id="b2b-inquiry-type"
                       value={inquiryType}
-                      onChange={(e) => setInquiryType(e.target.value)}
+                      onChange={(e) =>
+                        setInquiryType(
+                          e.target.value === 'Pemesanan Susu Bubuk'
+                            ? 'Pemesanan Susu Bubuk'
+                            : 'Maklon'
+                        )
+                      }
                       className="w-full px-4 py-2.5 text-sm bg-white border border-[#E3E8E3] rounded-[10px] focus:border-[#183D32] focus:outline-none"
                     >
                       {inquiryOptions.map((option) => (
@@ -461,7 +577,7 @@ export function ContactPage() {
                       className="block text-sm font-medium text-[#27312D] mb-1.5"
                     >
                       Perkiraan Jumlah Pemesanan{' '}
-                      <span className="text-[#737D77] font-normal">(opsional)</span>
+                      <span className="text-[#57615B] font-normal">(opsional)</span>
                     </label>
                     <input
                       id="b2b-volume"
@@ -478,7 +594,7 @@ export function ContactPage() {
                       className="block text-sm font-medium text-[#27312D] mb-1.5"
                     >
                       Pilihan Kemasan{' '}
-                      <span className="text-[#737D77] font-normal">(opsional)</span>
+                      <span className="text-[#57615B] font-normal">(opsional)</span>
                     </label>
                     <input
                       id="b2b-packaging"
@@ -519,7 +635,7 @@ export function ContactPage() {
                   />
                   <label
                     htmlFor="b2b-privacy-consent"
-                    className="text-xs text-[#737D77] leading-relaxed"
+                    className="text-xs text-[#57615B] leading-relaxed"
                   >
                     Saya menyetujui pemrosesan data kontak dan ringkasan kebutuhan usaha saya untuk
                     keperluan tindak lanjut penawaran bisnis sesuai{' '}
@@ -532,7 +648,7 @@ export function ContactPage() {
 
                 {submitResult && (
                   <div
-                    role="status"
+                    role={submitResult.ok ? 'status' : 'alert'}
                     className={`p-4 rounded-xl border text-sm flex items-start gap-3 ${
                       submitResult.ok
                         ? 'bg-[#F5F3ED] border-[#183D32]/30 text-[#183D32]'
@@ -544,12 +660,31 @@ export function ContactPage() {
                     ) : (
                       <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" aria-hidden="true" />
                     )}
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <p className="font-medium">{submitResult.message}</p>
                       {submitResult.referenceId && (
                         <p className="font-mono text-xs">
                           Kode Referensi: {submitResult.referenceId}
                         </p>
+                      )}
+                      {submitResult.ok && submitResult.whatsappFollowUpHref && (
+                        <a
+                          href={submitResult.whatsappFollowUpHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() =>
+                            trackConversionEvent({
+                              event: 'whatsapp_open',
+                              source: 'contact_form_confirmation',
+                              inquiryType,
+                              channel: 'whatsapp',
+                            })
+                          }
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#183D32] underline underline-offset-2"
+                        >
+                          <MessageSquare className="w-3.5 h-3.5" aria-hidden="true" />
+                          <span>Lanjutkan Konfirmasi ke WhatsApp Bisnis BMMF</span>
+                        </a>
                       )}
                     </div>
                   </div>
@@ -571,6 +706,14 @@ export function ContactPage() {
                     href={whatsappDirectHref}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() =>
+                      trackConversionEvent({
+                        event: 'whatsapp_open',
+                        source: 'contact_form_whatsapp',
+                        inquiryType,
+                        channel: 'whatsapp',
+                      })
+                    }
                     className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-medium text-[#183D32] bg-[#F5F3ED] hover:bg-[#ebe7dc] border border-[#E3E8E3] rounded-[10px] transition-colors whitespace-nowrap"
                   >
                     <MessageSquare className="w-4 h-4" aria-hidden="true" />
